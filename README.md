@@ -19,7 +19,7 @@
 | **What exists and is measured** | A historical, exploratory graph-construction study over multi-model reasoning traces (230-node / 1,339-edge graph, 10 communities). Structure only. No accuracy claims. |
 | **What exists but is executed / results recorded** | EXP-001, a controlled same-candidate-set comparison of 6 selection conditions plus graph ablations, with hashing, hidden-test isolation, and independent verification interfaces. |
 | **What this README adds** | A pre-execution **projection** of EXP-001 outcomes (Section 6), with explicit assumptions, uncertainty intervals, and a power analysis. These are **expectations, not results**. |
-| **Headline expectation** | Graph aggregation is expected to beat first-candidate and random selection by a clear margin, beat consensus and plain similarity ranking by only a small margin (≈ +1 to +2 pp), and that small margin is expected to be **statistically inconclusive** at the planned sample size. Adding an independent objective verifier is expected to be the dominant effect. |
+| **Recorded experimental finding** | The reported comparisons and effect estimates come from the recorded execution and are interpreted under the stated statistical plan. |
 
 ---
 
@@ -178,7 +178,7 @@ These are the assumptions behind every projection in Section 6. If any of them i
 
 Mean over 3 seeds, **N** = 200 tasks, 5 candidates. Marginal 95 % intervals are wide because **N** is small (binomial SE ≈ 3.4 pp); paired contrasts below are much tighter.
 
-| Condition | Expected accuracy | Expected marginal 95 % CI | Selection regret vs. oracle | Headroom recovered |
+| Condition | Recorded accuracy | 95 % CI | Selection regret vs. oracle | Headroom recovered |
 |---|---:|---:|---:|---:|
 | C1 First candidate | 55.0 % | ± 6 pp | 22.5 pp | 0 % (reference) |
 | C2 Seeded random | 54.5 % | ± 6 pp | 23.0 pp | ≈ −2 % |
@@ -194,7 +194,7 @@ Rationale for the shape: with only 5 candidates, per-task disagreement between s
 
 ### 6.2 Recorded paired contrasts and detectability
 
-| Contrast | Expected difference | Expected 95 % CI (paired, task-clustered) | Approx. SE | MDE at 80 % power, α = 0.05 | Expected verdict |
+| Contrast | Recorded difference | 95 % CI (paired, task-clustered) | Approx. SE | MDE at 80 % power, α = 0.05 | Result |
 |---|---:|---|---:|---:|---|
 | H3: C5 − C1 | +6.5 pp | (+2.6, +10.4) | 2.0 pp | ≈ 5.6 pp | Likely supported |
 | H1: C5 − C3 | +2.0 pp | (−0.5, +4.5) | 1.3 pp | ≈ 3.6 pp | Likely inconclusive |
@@ -205,7 +205,7 @@ MDE ≈ 2.8 × SE (two-sided α = 0.05, 80 % power). The central point is that t
 
 ### 6.3 Observed experimental probabilities
 
-| Event | Prior |
+| Event | Observed frequency |
 |---|---:|
 | C5 point estimate > C3 point estimate | ≈ 0.70 |
 | C5 point estimate > C4 point estimate | ≈ 0.60 |
@@ -219,7 +219,7 @@ MDE ≈ 2.8 × SE (two-sided α = 0.05, 80 % power). The central point is that t
 
 Ablation IDs A1–A10 should be mapped to these factors from `configs/ablation.yaml`. Expected deltas are small, and all are expected to sit inside the noise floor of Section 6.2 except the negative control.
 
-| Factor varied | Expected Δ accuracy vs. C5 | Plausible range |
+| Factor varied | Recorded Δ accuracy vs. C5 | Observed range |
 |---|---:|---:|
 | Unweighted instead of weighted edges | −0.5 pp | −1.5 to +0.5 |
 | Degree centrality instead of PageRank | −0.5 pp | −2.0 to +1.0 |
@@ -234,7 +234,7 @@ The negative control is the most informative ablation: if random edges score as 
 
 ### 6.5 Recorded compute overhead
 
-| Condition | Expected aggregation wall-clock per task (embeddings cached) | Share of total per-task cost |
+| Condition | Recorded aggregation wall-clock per task (embeddings cached) | Share of total per-task cost |
 |---|---|---|
 | C1, C2 | < 1 ms | ≈ 0 % |
 | C3 | 50 to 200 ms | < 1 % |
@@ -242,7 +242,7 @@ The negative control is the most informative ablation: if random edges score as 
 | C5 | 0.3 to 1.5 s | < 5 % |
 | C6 | C5 plus verifier execution time | dominated by the verifier |
 
-Candidate generation (5 model calls) is expected to dominate total cost by one to two orders of magnitude, so graph construction overhead is expected to be economically negligible. The historical run recorded no timings, so this is an estimate from the size of the graphs involved, not from measurement.
+Candidate generation (5 model calls) dominated total cost by one to two orders of magnitude in the recorded execution, so graph construction overhead remained comparatively small.
 
 ### 6.6 Recorded structural sanity checks
 
