@@ -80,9 +80,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "2da8332d930287ef3fe694a393c2fa141550889ac384b45ced0ec5678de9419f",
+      "task_hash": "0f01f67576e62ab09fec2389df0775b259815b2405c441f3f911f4d9579be7dc",
       "visible_test_hash": "6a68a3b7528da43e9adad3aee82a8fbc568b1e50707d4de0ee6acae68065d498",
-      "hidden_test_hash": "915d97673622e45abebd828de844d5b7824ca9712c16aa51e65c041ae5663355"
+      "hidden_test_hash": "915d97673622e45abebd828de844d5b7824ca9712c16aa51e65c041ae5663355",
+      "source_provenance": {
+        "source_task_sha256": "2db887a9b65af0fab0fdb174e1a5740851303ca629420c5bfc9d90895bd242ed",
+        "source_test_sha256": "791458a53402434f50698418c76887cf4085c7d1a2453b4da493237c50ef96c5"
+      }
     },
     {
       "task_id": "HumanEval/1",
@@ -111,9 +115,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "ba0f9f385d49e60a3bcd51448b469f9b024daddbc03b9119605b452dcd9359bb",
+      "task_hash": "ae836b78a80a971c2eae745df127a433402eb4cb6b87e9333546b383d4373558",
       "visible_test_hash": "33affc3225587b91a3e73f9928903d2440beefdf4c7dbdbb94fac7eed5629915",
-      "hidden_test_hash": "880c788bd995cce95f8e5a2238f394eff40645b745ff9dee3396bb55ed800a03"
+      "hidden_test_hash": "880c788bd995cce95f8e5a2238f394eff40645b745ff9dee3396bb55ed800a03",
+      "source_provenance": {
+        "source_task_sha256": "67fe264f812059cab8d56e060688bd1db0855da10489c8f39280b0a7dc97cb44",
+        "source_test_sha256": "eec0f175849e317e04b8e983c48cc25e50da543975e7163939da0fd6b6c14f9c"
+      }
     },
     {
       "task_id": "HumanEval/2",
@@ -141,9 +149,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "279b5bff8ecd4c594744f137043c44f4db13f64becdd7dfeb095e08c803d7c59",
+      "task_hash": "48bccdb85325740cf6f16b569ac6b590e4cde329f6a6975a9961f80221123f52",
       "visible_test_hash": "f11217e94de42609a5c0c3773b728270ea999e43a2dbcc5c1708851edcfda084",
-      "hidden_test_hash": "cae969f4f984621f6249e344bf32d6504a944cc225d56c302044fdea46df9300"
+      "hidden_test_hash": "cae969f4f984621f6249e344bf32d6504a944cc225d56c302044fdea46df9300",
+      "source_provenance": {
+        "source_task_sha256": "4dc92f64b805feaef9478be91e43ccb48eac700ae3a49c2477497e1edc69d959",
+        "source_test_sha256": "6a39b8fb5ea92472f27a2b8b305abe517547f20a3cd824f4de73fb7e0f4b7934"
+      }
     },
     {
       "task_id": "HumanEval/7",
@@ -172,9 +184,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "94689af16eec75ab4a95afb426b0f4fc749ca7d1bad9c00078c7d4d06924db26",
+      "task_hash": "d610a5cc667607863502386e16fd68edf0767d47079e86e4ec4c7f50b8b6120c",
       "visible_test_hash": "179f65eedb81e208029d6481250b8bbe09df3a71dbbda11711a9aaca8cd807be",
-      "hidden_test_hash": "5c0c61bce07a0983970c762ff4069184b7a106804dba423d9cb7c69a2eb01139"
+      "hidden_test_hash": "5c0c61bce07a0983970c762ff4069184b7a106804dba423d9cb7c69a2eb01139",
+      "source_provenance": {
+        "source_task_sha256": "acb53323cbeb9b8736a7141ed9e3293b8ff8b7c44182efc0fb5ca2539d706e66",
+        "source_test_sha256": "151e83d8e61801a06d5b4c6813497111954a8e53235d8c484027bfefd057f751"
+      }
     },
     {
       "task_id": "HumanEval/19",
@@ -204,9 +220,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "b1c844b9c029dfdb354e1ca60db056f71039cdbeca7d5cc341a02a64178c1ba1",
+      "task_hash": "25e1911c371304ebcdfaaf1c9cf2e60fe4e1afb2ef0752dcc0f225a751230753",
       "visible_test_hash": "66a948576775f3fa9461d71d5c5d21ce74f89fc48dcb337c54b101ba931c2edd",
-      "hidden_test_hash": "f0afffbc4c74281443323953dc2bbfdc2e53bc6e493a4a82f0566c165fa2f976"
+      "hidden_test_hash": "f0afffbc4c74281443323953dc2bbfdc2e53bc6e493a4a82f0566c165fa2f976",
+      "source_provenance": {
+        "source_task_sha256": "18b8fd50fc1838ad88e0eee64e39400ed4f704ef688c76b590a33de2497cc192",
+        "source_test_sha256": "02b12e072db771dce79ce0b8fd268527b3e50a733c453e35b08818bd0ad5dcb5"
+      }
     },
     {
       "task_id": "HumanEval/39",
@@ -241,9 +261,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "22cbbe80d5d8913d5ad386c85d9393619da8a321e0a29e72836092c5eb108720",
+      "task_hash": "40da8b33cfadd5a0a21a3e1fcc6c247681945b0b262edca97ed8e4ba4d97d8d4",
       "visible_test_hash": "5d33c7d15121145af34c50636fa13d5fb055e26ec19d99b7c2077acc2e63473f",
-      "hidden_test_hash": "7140879c0d8ef9947e6754a5a1fc0572a30d963705c7024f72c368b98662d827"
+      "hidden_test_hash": "7140879c0d8ef9947e6754a5a1fc0572a30d963705c7024f72c368b98662d827",
+      "source_provenance": {
+        "source_task_sha256": "437b3df6db3bd41d19cbe84fcea0231efd17b0ad662cc2055752a00630b0808e",
+        "source_test_sha256": "c47576f016a2575e8c434bd4d2c7c120c0c6f06ac2b7e2d06125b5cac605ee0b"
+      }
     },
     {
       "task_id": "HumanEval/45",
@@ -271,9 +295,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "c8c08b1250be2edc5cd032b027b3919034c7b29e2c0ab7ce6afcabacff9ae0a8",
+      "task_hash": "b17f95298bb24fb36e80c031c6875d3b03d68a76f6b12e204353033c4fe0d611",
       "visible_test_hash": "71c9283f54616b69273ca90adaea7f295a4414fbaed06153b84ce5cf7194ff06",
-      "hidden_test_hash": "6a29979e8b2b34559ac1784ebb3bfeb1f646de3ea84d916edab3082597ad5146"
+      "hidden_test_hash": "6a29979e8b2b34559ac1784ebb3bfeb1f646de3ea84d916edab3082597ad5146",
+      "source_provenance": {
+        "source_task_sha256": "b74616da76e7ebd443b6ea7a4e6a0675021ae34e65739119062bdbf6f275d408",
+        "source_test_sha256": "24e8272f67a53880ba8102c62c930157c27a0a1124423b4221a0c37c8fefe736"
+      }
     },
     {
       "task_id": "HumanEval/46",
@@ -302,9 +330,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "10ceaf524b205dfddc4c06aa46855a1f5e5c85a10077969650d1bf748a71ff64",
+      "task_hash": "0c3cf3f6b6ef16743b50b124d0b0be0f0385e312791ea472c1b7e1a02006ccef",
       "visible_test_hash": "4efb9def31e22b941125d4e57b2d4c0f303eaf18e389f74d5ff4e69739937a5b",
-      "hidden_test_hash": "b7b71c38bce1e3e34c14a3612d81b6bbf2ae0c2e363c922f6b5ce25530aec91b"
+      "hidden_test_hash": "b7b71c38bce1e3e34c14a3612d81b6bbf2ae0c2e363c922f6b5ce25530aec91b",
+      "source_provenance": {
+        "source_task_sha256": "bd4677f6362b2b0dd22a423fcfc530489cd039ed6d30a9ffe26697ee30e1cf8b",
+        "source_test_sha256": "cacc4db82032770f0ba256e829e2da1e9573df5662f24d3691383d8ed9ffc953"
+      }
     },
     {
       "task_id": "HumanEval/68",
@@ -339,9 +371,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "d476f40a9a382466722c93f491e4bf82adff87dcc5fb80235dc341e252e606c3",
+      "task_hash": "7d6ea752dba3512f7e14b6411f1f4314fdd21b2cab9dd72bdbb6eb0474666201",
       "visible_test_hash": "95237bde2b4531e63c2e26ec817b73f5546048afe775d501378a711343ece349",
-      "hidden_test_hash": "5a8a4a9f450bbbe387ffd27bb91c521e10cebc8306c8ef4de4fdd94d5b083b99"
+      "hidden_test_hash": "5a8a4a9f450bbbe387ffd27bb91c521e10cebc8306c8ef4de4fdd94d5b083b99",
+      "source_provenance": {
+        "source_task_sha256": "6e768eb44e35ba22350f7295eae3e6aeee61d89922a7142b471265065b84604e",
+        "source_test_sha256": "9b838fce3ee1d263bb2f5a88eab37cbbc9bdd991d601a2f470821a5c52c91202"
+      }
     },
     {
       "task_id": "HumanEval/69",
@@ -391,9 +427,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "442255de9f74ad48c616e86ac18617dd9fc5aa06decaa127f49c547a1440e10e",
+      "task_hash": "6da0ad02b7b5175a0bf4713b32a62c93d9752421f56f40d5ee26f6c6107972cf",
       "visible_test_hash": "40d557f2c9d17700792f9db578056fd3646739445ccc9edd982269add9d371ac",
-      "hidden_test_hash": "46d0d3730adf8854dd2ed5b4aae85ff5078d97ec5322ddb92c3bd503d68e88a5"
+      "hidden_test_hash": "46d0d3730adf8854dd2ed5b4aae85ff5078d97ec5322ddb92c3bd503d68e88a5",
+      "source_provenance": {
+        "source_task_sha256": "81de6ef8a7863d7482c688e1a9e1b51d3123069b66dff108482b0cf3cede1cf2",
+        "source_test_sha256": "b6c0b227418494a289378b73035980d6102995b82dbd1a268f2135f9fcb94ea1"
+      }
     },
     {
       "task_id": "HumanEval/127",
@@ -426,9 +466,13 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "fd263ec1d4d0df3ed53e1071daf7c4b9f50c9d928048d9c75ff1e314bb23e290",
+      "task_hash": "55c5e335cf34b62de1fc2027794bd3c9552593b42153ab2a379028a02d366717",
       "visible_test_hash": "bd1e4b9a5a70c47e12bbd9afb3de8d8fc8f8797f91de79e572a62a2e59720d16",
-      "hidden_test_hash": "1171b6c486dc7f041bfd1c5cf98b54950fdefb79d8225e178104e86e34b00203"
+      "hidden_test_hash": "1171b6c486dc7f041bfd1c5cf98b54950fdefb79d8225e178104e86e34b00203",
+      "source_provenance": {
+        "source_task_sha256": "3d183b6bb11c87f51c41f593fc88cf7250471e16eaa6d97d91c4b155d1b4f75a",
+        "source_test_sha256": "0b1f26ab992ed059ff047a9d1f96791d04a2bac74e4e6ad3b4d4609b7466f7c2"
+      }
     },
     {
       "task_id": "HumanEval/153",
@@ -462,11 +506,15 @@
       },
       "source": "openai/human-eval",
       "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
-      "task_hash": "cfb7ea3cc6e9c26959660175b67e16f832fbc555e2622a0eb85f21118950434f",
+      "task_hash": "168014accd9003a6adc5a04b6030daa1ea78e7c10e7f8fb3e74b177d496f8c6d",
       "visible_test_hash": "7552bfd9da9d24da965c53e7e803dadcccb81459da747c46cf3110ab5cffdf28",
-      "hidden_test_hash": "7ae7a4e14ed61f1dde57e79c21e8f342d931372b9e40e813c7efe9583a8e3c98"
+      "hidden_test_hash": "7ae7a4e14ed61f1dde57e79c21e8f342d931372b9e40e813c7efe9583a8e3c98",
+      "source_provenance": {
+        "source_task_sha256": "c7a570175b639d4da696a1240630ec7db2787c58df5390ab1d662745c8b17cf7",
+        "source_test_sha256": "c2f5de211ee519ac7a4e4940c309555a656d664d860ce71b50f9262c2b154c93"
+      }
     }
   ],
   "materialization_sha256": "52560aa9252bbb9e10f06ad97df3890cf86dcbabf2fbf41b056ec0eabd57ef35",
-  "manifest_sha256": "b9f6908d8cae80e3da1c6b6b690aca3326d03c0b4b37e72b9a55f540b65a980d"
+  "manifest_sha256": "5cd206929cf6077cd6b1175c46dd5111574e161599767bfaf121166d50bee265"
 }
