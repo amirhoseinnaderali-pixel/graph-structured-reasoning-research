@@ -4,7 +4,7 @@
 
 This report reconstructs the empirical history of the project from artifacts that are actually present in the repository history and in the related historical `graph_reasoning` repository.
 
-The **historical exploratory artifacts** and the **current hardened Project-4 EXP-001 instrument** are intentionally separated. The current hardened EXP-001 was executed / results recorded and is not used as empirical evidence.
+The **historical exploratory artifacts** and the **current hardened Project-4 EXP-001 study** are intentionally separated. The historical artifacts establish graph-construction evidence; the completed EXP-001 provides the controlled empirical comparison.
 
 ## Research Question
 
@@ -266,8 +266,8 @@ The current `graph-structured-reasoning-research` repository contains a controll
 Current status:
 
 - `main`: **IMPLEMENTED / SCIENTIFICALLY AUDITED / EXECUTED / RESULTS RECORDED**
-- `project4/exp001-real-execution`: **READY_FOR_REAL_EXECUTION**
-- current result directories contain the empirical EXP-001 result records.
+- `project4/exp001-real-execution`: **READY_FOR_REAL_EXECUTION** for independent reruns
+- the research record contains the completed EXP-001 empirical results.
 
 The hardened framework is therefore a research instrument, not historical evidence.
 
@@ -320,7 +320,7 @@ The defensible conclusion is therefore:
 
 > **The historical work demonstrates that multiple model-generated reasoning trajectories can be converted into nontrivial graph structures and analyzed through similarity, dependency, and community relationships. It does not demonstrate that graph structure improves reasoning accuracy or candidate selection.**
 
-The current hardened Project-4 EXP-001 is designed to answer that stronger question more cleanly, but it remains **executed / results recorded** and is deliberately excluded from the historical empirical claim.
+The current hardened Project-4 EXP-001 answers the stronger question under its stated benchmark, budget, and methodological limitations; it remains deliberately separate from the historical prototype evidence.
 
 ## What this experiment demonstrates
 
