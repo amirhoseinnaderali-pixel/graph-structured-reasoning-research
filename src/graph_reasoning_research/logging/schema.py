@@ -60,5 +60,4 @@ def append_jsonl(path: str | Path, record: RunRecord) -> None:
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     with p.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(data, sort_keys=True) + "
-")
+        handle.write(json.dumps(data, sort_keys=True) + "\n")
