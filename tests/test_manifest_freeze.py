@@ -5,6 +5,8 @@ def test_exp001_manifest_is_frozen_and_hash_locked():
     manifest=load_manifest(ROOT/"benchmarks/manifests/EXP-001-v1.json",require_frozen=True)
     assert manifest["benchmark_status"]=="FROZEN"
     assert manifest["task_count"]==12
+    print("CANONICAL_MANIFEST_SHA256", manifest_hash(manifest))
+    print("STORED_MANIFEST_SHA256", manifest["manifest_sha256"])
     assert manifest_hash(manifest)==manifest["manifest_sha256"]
     load_materialized_tasks(ROOT/"benchmarks/programming/exp001_v1/tasks.jsonl",manifest)
     for task in manifest["tasks"]:
