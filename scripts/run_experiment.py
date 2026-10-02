@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, json, subprocess, sys
+import argparse, json, subprocess, sys, uuid
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"src"))
@@ -31,7 +31,14 @@ def main()->int:
     try:
         path=run_real(ROOT,config,smoke=False)
     except Exception as exc:
+        run_id=uuid.uuid4().hex
+        artifact=ROOT/"results/raw/EXP-001"/f"FAILED-{run_id}.json"
+        artifact.parent.mkdir(parents=True,exist_ok=True)
+        status="BUDGET_INELIGIBLE" if "budget_ineligibility" in str(exc) else "INFRASTRUCTURE_ERROR" if "verification infrastructure" in str(exc) or "preflight" in str(exc).lower() else "MODEL_OR_PIPELINE_FAILURE"
+        with artifact.open("x",encoding="utf-8") as handle:
+            json.dump({"experiment_id":"EXP-001","run_id":run_id,"status":status,"error":str(exc),"error_type":type(exc).__name__,"empirical_evidence":False},handle,indent=2,sort_keys=True)
         print(f"REAL EXECUTION FAILED CLOSED: {type(exc).__name__}: {exc}")
+        print(f"Failure artifact: {artifact}")
         return 3
     print(json.dumps({"status":"EXECUTED","path":str(path)},indent=2))
     return 0
