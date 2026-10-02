@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse, json, subprocess, sys, uuid
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
 sys.path.insert(0,str(ROOT/"src"))
 from graph_reasoning_research.experiments.config import load_yaml, validate_config
 from graph_reasoning_research.experiments.runner import run_mock, run_real
