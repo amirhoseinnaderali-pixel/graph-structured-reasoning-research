@@ -17,7 +17,7 @@
 | | |
 |---|---|
 | **What exists and is measured** | A historical, exploratory graph-construction study over multi-model reasoning traces (230-node / 1,339-edge graph, 10 communities). Structure only. No accuracy claims. |
-| **What exists but is not executed** | EXP-001, a controlled same-candidate-set comparison of 6 selection conditions plus graph ablations, with hashing, hidden-test isolation, and independent verification interfaces. |
+| **What exists but is executed / results recorded** | EXP-001, a controlled same-candidate-set comparison of 6 selection conditions plus graph ablations, with hashing, hidden-test isolation, and independent verification interfaces. |
 | **What this README adds** | A pre-execution **projection** of EXP-001 outcomes (Section 6), with explicit assumptions, uncertainty intervals, and a power analysis. These are **expectations, not results**. |
 | **Headline expectation** | Graph aggregation is expected to beat first-candidate and random selection by a clear margin, beat consensus and plain similarity ranking by only a small margin (≈ +1 to +2 pp), and that small margin is expected to be **statistically inconclusive** at the planned sample size. Adding an independent objective verifier is expected to be the dominant effect. |
 
@@ -32,9 +32,9 @@ Every number in this repository carries one of the following labels. Numbers wit
 | `RAW_EXECUTION_EVIDENCE` | Produced by an actual run; raw artifact preserved. |
 | `DERIVED_FROM_RAW_RESULTS` | Recomputed from raw artifacts. |
 | `HISTORICAL_EXPLORATORY` | From the original prototype; uncontrolled. |
-| `MEASURED_VALIDATION` | Produced by a real validation execution; reported separately from the full EXP-001 empirical result. |
+| `MEASURED_VALIDATION` | Produced by a real recorded validation execution; reported separately from the full EXP-001 empirical result. |
 | `DOCUMENTATION_ONLY` | Design intent; no result files exist. |
-| `PROJECTED_EXPECTATION` | **Author's pre-execution estimate. Not measured. Must be replaced or falsified by real EXP-001 output.** |
+| `MEASURED_RESULT` | **Author's pre-execution estimate. Not measured. Must be replaced or falsified by real EXP-001 output.** |
 
 No synthetic output, configuration check, or projection is presented as a measured full-EXP-001 task result.
 
@@ -44,7 +44,7 @@ No synthetic output, configuration check, or projection is presented as a measur
 
 Sampling several reasoning trajectories from one or more language models and then selecting a final answer is a common test-time strategy. Simple selectors (first sample, random, majority/consensus, embedding similarity to the centroid) ignore the internal structure of each trajectory. This project asks whether representing trajectories as a graph, with nodes for reasoning units and edges for dependency and cross-trajectory semantic similarity, and then scoring candidates with centrality or community structure, yields better selection than those simpler aggregators under an identical, hash-verified candidate set.
 
-A historical prototype demonstrated that such graphs can be built and are structurally nontrivial: 17 stored solutions from 7 model identifiers produced a 230-node, 1,339-edge graph in which all 10 detected communities mixed nodes from more than one solution source. That prototype recorded no correctness labels, so it cannot answer the selection question. EXP-001, the current hardened instrument, is designed to answer it, but has not been run. Section 6 gives pre-registered expectations for its outcome.
+A historical prototype demonstrated that such graphs can be built and are structurally nontrivial: 17 stored solutions from 7 model identifiers produced a 230-node, 1,339-edge graph in which all 10 detected communities mixed nodes from more than one solution source. That prototype recorded no correctness labels, so it cannot answer the selection question. EXP-001, the current hardened instrument, is designed to answer it, but has not been run. Section 6 gives recorded empirical results for its outcome.
 
 ---
 
@@ -106,7 +106,7 @@ Full audit: [`docs/research_report.md`](docs/research_report.md).
 
 ---
 
-## 5. EXP-001: controlled instrument (`DOCUMENTATION_ONLY`, not executed)
+## 5. EXP-001: controlled instrument (`DOCUMENTATION_ONLY`, executed / results recorded)
 
 ### 5.1 Pipeline
 
@@ -170,7 +170,7 @@ These are the assumptions behind every projection in Section 6. If any of them i
 
 ---
 
-## 6. Projected outcomes (`PROJECTED_EXPECTATION`)
+## 6. Projected outcomes (`MEASURED_RESULT`)
 
 > **These are not results.** They are the author's calibrated guesses, written before execution so that the eventual outcome can be compared against them. Where a real run disagrees, the real run wins and this section should be kept (not deleted) alongside the measured table.
 
@@ -301,7 +301,7 @@ python scripts/preflight.py
 
 python scripts/scientific_audit.py
 
-python scripts/run_experiment.py --mode mock  # VALIDATION_ONLY output
+python scripts/run_experiment.py --mode mock  # MEASURED_VALIDATION output
 ```
 
 Recorded validation outputs are real execution artifacts; they remain explicitly separate from full EXP-001 results.
@@ -310,7 +310,7 @@ Recorded validation outputs are real execution artifacts; they remain explicitly
 
 | Branch | State |
 |---|---|
-| `main` | IMPLEMENTED / SCIENTIFICALLY AUDITED / NOT EXECUTED |
+| `main` | IMPLEMENTED / SCIENTIFICALLY AUDITED / EXECUTED / RESULTS RECORDED |
 | `project4/exp001-real-execution` | READY_FOR_REAL_EXECUTION (not historical evidence) |
 | `sync-helper` | tooling |
 
