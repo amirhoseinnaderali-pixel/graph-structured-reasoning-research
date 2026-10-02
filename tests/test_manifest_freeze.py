@@ -6,8 +6,6 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def test_exp001_manifest_is_frozen_and_hash_locked():
     raw=json.loads((ROOT/"benchmarks/manifests/EXP-001-v1.json").read_text(encoding="utf-8"))
-    print("CANONICAL_MANIFEST_SHA256", manifest_hash(raw))
-    print("STORED_MANIFEST_SHA256", raw["manifest_sha256"])
     manifest=load_manifest(ROOT/"benchmarks/manifests/EXP-001-v1.json",require_frozen=False)
     assert manifest["benchmark_status"]=="FROZEN"
     assert manifest["task_count"]==12
