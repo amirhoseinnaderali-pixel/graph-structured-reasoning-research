@@ -17,3 +17,12 @@ jobs:
       - run: python scripts/validate_config.py
       - run: python scripts/scientific_audit.py
       - run: python scripts/run_experiment.py --mode mock
+
+      - name: Assert real preflight fails closed without credentials
+        env:
+          OPENAI_API_KEY: ""
+        run: |
+          if python scripts/run_experiment.py --mode real; then
+            echo "real execution unexpectedly started without credentials"
+            exit 1
+          fi
