@@ -1,7 +1,13 @@
 # Graph Design
 
-Graph construction is a first-class, hashed configuration. EXP-001 supports threshold and k-nearest-neighbor graphs, weighted or unweighted edges, and weighted-degree, degree-centrality, PageRank, and local-neighborhood-agreement scoring.
+The primary graph is a threshold graph over normalized candidate representations with cosine similarity threshold 0.75 and weighted edges. The primary score is weighted degree.
 
-A threshold graph includes edge `(i,j)` when cosine similarity is at least the configured threshold. A k-NN graph connects each node to its deterministic top-k neighbors and materializes the union as an undirected graph. Weighted edges retain cosine similarity; unweighted edges use unit weight.
+The ablation grid contains 16 conditions:
 
-Every graph run records graph method, full graph configuration, graph configuration hash, node count, edge count, density, construction latency, and scoring latency. Graph scores are ranking signals rather than correctness probabilities.
+- builders: threshold and k-nearest-neighbor (k=3)
+- edge modes: weighted and unweighted
+- scoring: weighted degree, degree centrality, PageRank, and local neighborhood agreement
+
+Graph configuration hashes are stored with results. Nodes are the exact frozen candidate IDs, and graph construction consumes only the shared representation similarity matrix. No test execution result is an input to graph construction or scoring.
+
+The same candidate set is used for non-graph similarity ranking and every graph condition. This keeps graph modeling as the manipulated factor rather than candidate generation.
