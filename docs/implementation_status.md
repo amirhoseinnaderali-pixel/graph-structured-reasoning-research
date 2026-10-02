@@ -20,7 +20,7 @@ The repository must never collapse these states into complete.
 - Hidden tests are attached only to verifier inputs after selection.
 - Primary C0-C5 conditions and a 16-cell C6 graph ablation factorial are implemented.
 - Docker verifier is pinned and hardened.
-- Budget counters are checked before generation, representation, verification, and graph operations.
+- Budget counters are checked before generation, representation, verification, and graph operations; stage wall-clock limits are enforced fail-closed after each stage.
 - Real and mock adapters are explicitly separated.
 - Raw result artifacts use exclusive file creation and include environment/config/benchmark hashes.
 - Real smoke artifacts are stored separately under results/smoke_test/.
