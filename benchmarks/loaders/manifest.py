@@ -71,8 +71,9 @@ def load_manifest(path: str | Path, *, require_frozen: bool = True) -> dict[str,
             _verify_hash(f"hidden_test_hash for {task['task_id']}", task["hidden_test_hash"], task["hidden_tests"])
             if task["visible_tests"] == task["hidden_tests"]:
                 raise ValueError(f"visible/hidden tests are identical for {task['task_id']}")
-            if "hidden_tests" in task["candidate_generation_prompt_view"] or "hidden" in task["candidate_generation_prompt_view"].lower():
-                raise ValueError(f"candidate prompt contains hidden-test material for {task['task_id']}")
+            expected_prefix = "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n"
+            if task["candidate_generation_prompt_view"] != expected_prefix + task["problem"]:
+                raise ValueError(f"candidate prompt is not the frozen problem-only view for {task['task_id']}")
     return data
 
 
