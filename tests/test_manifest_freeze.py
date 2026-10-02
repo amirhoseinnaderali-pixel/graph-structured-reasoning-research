@@ -19,7 +19,7 @@ def test_exp001_manifest_is_frozen_and_hash_locked():
         import hashlib
         core={"task_id":task["task_id"],"entry_point":task["entry_point"],"problem":task["problem"],"source":task["source"],"source_version":task["source_version"],"source_task_sha256":task["source_provenance"].get("source_task_sha256"),"source_test_sha256":task["source_provenance"].get("source_test_sha256")}
         expected[task["task_id"]]=hashlib.sha256(canonical_json(core).encode("utf-8")).hexdigest()
-    raise AssertionError({"EXPECTED_TASK_HASHES":expected,"STORED_TASK_HASHES":{t["task_id"]:t["task_hash"] for t in manifest["tasks"]}}) if False else None
+    raise AssertionError({"EXPECTED_TASK_HASHES":expected,"STORED_TASK_HASHES":{t["task_id"]:t["task_hash"] for t in manifest["tasks"]}})
     assert manifest["task_count"]==12
     assert manifest_hash(manifest)==manifest["manifest_sha256"]
     load_materialized_tasks(ROOT/"benchmarks/programming/exp001_v1/tasks.jsonl",manifest)
