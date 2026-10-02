@@ -14,6 +14,6 @@
 12. Limitations
 13. Conclusion
 
-## Results placeholder
+## Results
 
-Results are intentionally omitted until EXP-001 is executed on the frozen benchmark. No empirical claim should be inserted here before execution.
+The completed EXP-001 results are reported in the repository's README and research report, with uncertainty intervals, ablation results, and methodological limitations.
