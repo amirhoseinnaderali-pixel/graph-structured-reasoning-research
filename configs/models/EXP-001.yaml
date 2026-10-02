@@ -1,15 +1,22 @@
 experiment_id: EXP-001
-status: UNFROZEN
+status: FROZEN
 candidate_generator:
-  provider: external_api
-  model_id: UNSET
-  model_revision: UNSET
-  temperature: UNSET
-  max_tokens: UNSET
-  credential_env: UNSET
-embedding:
-  provider: UNSET
-  model_id: UNSET
-  revision: UNSET
-  normalize_embeddings: true
-  batch_size: 32
+  provider: openai
+  adapter: chat_completions_v1
+  model_id: gpt-4.1-mini-2025-04-14
+  model_revision: gpt-4.1-mini-2025-04-14
+  base_url: https://api.openai.com/v1
+  api_version: chat_completions_v1
+  credential_env: OPENAI_API_KEY
+  temperature: 0.2
+  top_p: 1.0
+  max_tokens: 6000
+  supports_seed: true
+  response_format:
+    type: json_object
+  candidate_count: 5
+  calls_per_task_seed: 1
+  seed_policy: request_seed_equals_experiment_seed
+  retry_policy:
+    max_attempts: 2
+    retry_on: [429, 500, 502, 503, 504, timeout]

@@ -1,9 +1,10 @@
 experiment_id: EXP-001
 title: Controlled Graph Aggregation Benchmark
-status: NOT_EXECUTED
+status: READY_FOR_REAL_EXECUTION
 mode_policy:
-  real_execution_enabled: false
+  real_execution_enabled: true
   mock_allowed: true
+  mock_is_evidence: false
 benchmark_manifest: benchmarks/manifests/EXP-001-v1.json
 candidate_generator_config: configs/models/EXP-001.yaml
 representation_config: configs/representations/EXP-001.yaml
@@ -31,3 +32,5 @@ scientific_controls:
   hidden_test_isolation: true
   representation_hashing: true
   graph_config_hashing: true
+  single_candidate_generation_call_per_task_seed: true
+  hidden_evaluation_after_selection_only: true

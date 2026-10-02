@@ -1,14 +1,17 @@
 experiment_id: EXP-001
-status: UNFROZEN
-docker_image: UNSET
+status: FROZEN
+docker_image: python:3.11-slim-trixie@sha256:174bec68e0451bffabbb08c7d5d21c6b253f772d81d52b9558af97bb3159b761
 platform: linux/amd64
 network: none
 read_only_root: true
 no_new_privileges: true
 drop_all_capabilities: true
 ipc: none
-tmpfs_tmp: true
 pids_limit: 64
 memory: 512m
-cpus: 1
+cpus: "1"
 timeout_seconds: 10
+tmpfs:
+  path: /tmp
+  mode: rw,noexec,nosuid,size=64m
+pull_policy: pinned_digest_only

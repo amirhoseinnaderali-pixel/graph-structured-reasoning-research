@@ -1,4 +1,4 @@
 experiment_id: EXP-001
 status: UNAVAILABLE
-reason: No verified pricing source has been frozen for the selected inference provider.
+reason: Pricing is not required for eligibility; monetary cost is reported only when a verified frozen provider price is available.
 monetary_cost_reporting: disabled_until_frozen
