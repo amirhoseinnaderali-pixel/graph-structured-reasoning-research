@@ -1,35 +1,11 @@
 # Methodology
 
-## Central comparison
+EXP-001 uses the same candidate set for every aggregation condition within each task/seed. Candidate generation is performed once, the resulting candidate set receives a deterministic candidate-set hash, and a single frozen representation artifact is reused by C0-C6.
 
-```text
-problem
-  -> fixed candidate generator
-  -> N frozen candidate trajectories
-  -> explicit representation
-  -> similarity matrix
-  -> aggregation / selection
-  -> objective evaluation
-```
+The frozen benchmark is a 12-task stratified subset of the Project-3 HumanEval-derived benchmark family: the first eligible source-order task for each of 12 categories. The materialized task file and every task/test split are hash-locked.
 
-The same candidate set is consumed by every aggregation condition. Candidate generation is not rerun per condition. Each candidate carries a candidate ID, task ID, generator model ID, seed, generation configuration hash, and output hash; the ordered candidate manifest is hashed into `candidate_set_hash`. A comparison fails if candidate manifests differ.
+C0 selects the first candidate. C1 uses seeded random selection. C2 uses the existing answer-consensus mechanism. C3 ranks directly by cosine similarity on the shared representation. C4 uses the primary threshold graph with weighted edges and weighted-degree scoring. C5 ranks candidates through the graph first, then applies visible objective verification to at most the frozen two-candidate shortlist. C6 enumerates threshold/kNN × weighted/unweighted × four frozen graph scoring functions.
 
-## Conditions
+Hidden tests are structurally unavailable to candidate generation, representation, similarity, consensus, graph construction, graph scoring, and selection. Hidden evaluation happens only after a strategy has selected one candidate.
 
-- C0 — first candidate.
-- C1 — seeded random candidate.
-- C2 — consensus/majority.
-- C3 — similarity ranking without graph construction.
-- C4 — graph aggregation.
-- C5 — graph prioritization followed by independent objective verification.
-- C6 — graph-construction/scoring ablations.
-
-Graph-vs-similarity comparisons use the same representations and the same similarity matrix.
-
-## Hidden-test isolation
-
-Hidden evaluation is isolated from all selection-visible computation. Regression tests mutate hidden metadata while holding candidate text and hashes fixed and assert that representation hashes, graph edges, graph scores, and selected candidates remain unchanged.
-
-## Compute
-
-Generation calls/tokens, representation calls/tokens/latency, similarity latency, graph construction, graph scoring, aggregation latency, visible verification, and hidden evaluation are separate result fields.
+The real execution environment uses the frozen linux/amd64 Docker digest and no network inside the candidate verifier. Budget counters are reserved before the corresponding operations and budget violations fail closed.
