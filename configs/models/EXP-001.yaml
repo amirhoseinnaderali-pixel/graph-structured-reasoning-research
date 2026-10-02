@@ -18,5 +18,5 @@ candidate_generator:
   calls_per_task_seed: 1
   seed_policy: request_seed_equals_experiment_seed
   retry_policy:
-    max_attempts: 2
+    max_attempts: 1
     retry_on: [429, 500, 502, 503, 504, timeout]
