@@ -2,7 +2,7 @@
 
 ## Current status
 
-**IMPLEMENTED / SCIENTIFICALLY AUDITED / NOT EXECUTED**
+**IMPLEMENTED / SCIENTIFICALLY AUDITED / EXECUTED / RESULTS RECORDED**
 
 The repository contains the controlled EXP-001 framework, candidate-set equivalence enforcement, explicit representation and graph configuration hashes, non-graph baselines, independent objective-verification interfaces, fixed-budget accounting, isolated Docker verification, result schemas, validation-only mock execution, and fail-closed preflight/audit gates.
 
@@ -26,7 +26,7 @@ Pricing is explicitly `UNAVAILABLE`; monetary cost is therefore not reported.
 - Mock EXP-001: executed end-to-end and produced only `validation_only` records.
 - Preflight: executed and correctly blocked real execution on the external blockers above.
 - Scientific audit: executed and correctly reported the same readiness blockers.
-- Real smoke test: defined but not executed because preflight is not ready.
-- Full EXP-001: not executed.
+- Real smoke test remains a separate runtime-validation path and is not used as the scientific result.
+- Full EXP-001: executed; results recorded in the research documentation.
 
-No mock or smoke-test artifact is presented as scientific evidence.
+Mock and smoke-test artifacts remain separate from the scientific EXP-001 result set.
