@@ -10,6 +10,85 @@ Project 4 studies one focused question:
 
 > **Does explicitly modeling relationships between multiple reasoning trajectories as a graph improve final candidate selection compared with simpler aggregation methods, under the same candidate set?**
 
+---
+
+# Expected Hypothesis — Pre-Execution
+
+> ⚠️ **HYPOTHESIS ONLY — NOT AN EMPIRICAL RESULT**
+>
+> The following section states the expected behavior of the frozen EXP-001 before the benchmark is executed. It is a falsifiable pre-data hypothesis, not a measured result, ranking, or performance claim.
+
+## Hypothesized Result
+
+We hypothesize that graph-based aggregation will provide a **modest but measurable improvement in candidate-selection accuracy** over simpler aggregation methods when generated reasoning trajectories contain complementary or partially conflicting information.
+
+The expected pattern is that:
+
+- **Consensus** should perform well when multiple candidates converge on the same correct reasoning.
+- **Similarity-based ranking** should be effective when semantically similar solutions are also correct.
+- **Graph-based aggregation** should become more useful when correctness depends on combining information across multiple trajectories, because the graph explicitly represents both semantic similarity and relational structure among candidate reasoning paths.
+
+We therefore expect the primary graph condition — using a **similarity-threshold graph with weighted edges and weighted-degree scoring** — to outperform first-candidate and random selection, and potentially provide a small improvement over direct similarity ranking and consensus on heterogeneous tasks.
+
+The expected improvement should be larger on tasks where correct solutions appear as **structurally connected reasoning patterns** rather than as repeated identical answers.
+
+## Expected trade-off
+
+The main anticipated trade-off is **computational overhead**.
+
+Graph construction, embedding-based similarity computation, edge construction, and graph scoring introduce additional computation and latency relative to simpler aggregation methods.
+
+The expected conclusion is therefore **not** that graph aggregation universally dominates every baseline.
+
+Instead:
+
+> **Graph aggregation may provide a better accuracy–compute trade-off on tasks with diverse reasoning trajectories, while offering less benefit when candidates are already highly redundant or nearly identical.**
+
+## Expected ablation behavior
+
+The ablation study is expected to show that performance depends on both **graph construction** and **graph scoring**.
+
+We hypothesize that:
+
+- **Weighted graphs** preserve useful similarity information better than unweighted graphs.
+- **PageRank** and **local-neighborhood agreement** may behave differently depending on graph density and topology.
+- **Similarity-threshold** and **k-nearest-neighbor** graph variants may produce different robustness profiles.
+- Graph construction itself is therefore an important experimental factor, rather than a neutral preprocessing step.
+
+These expectations are intentionally directional rather than numerical because the current repository does not contain a real EXP-001 result set.
+
+## Anticipated mechanism
+
+The hypothesized mechanism is:
+
+```text
+Multiple reasoning trajectories
+            ↓
+Semantic + relational structure
+            ↓
+Explicit reasoning graph
+            ↓
+Aggregation / centrality / neighborhood signals
+            ↓
+Better candidate selection
+```
+
+The strongest expected gains should occur when useful information is **distributed across different trajectories** rather than repeated verbatim.
+
+## What would count as support?
+
+A future real run would support the hypothesis if the graph condition:
+
+1. receives the same frozen candidate set as the comparison methods;
+2. improves objective candidate-selection accuracy on the held-out evaluation;
+3. retains that advantage after the graph's additional compute is accounted for.
+
+A result in which graph aggregation is no better than simpler methods, or where its compute overhead outweighs a small accuracy gain, would weaken the hypothesis.
+
+A surprising result is therefore valid evidence; the hypothesis is not intended to be retrofitted after observing the data.
+
+---
+
 ## Historical research case study
 
 The repository now separates the **historical exploratory evidence** from the **current hardened experiment instrument**.
