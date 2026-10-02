@@ -42,5 +42,5 @@ frozen_input_blob_shas:
   budget_config: 55f60cd744d6b77d6581a109f0e7ab51bc124c0a
   runtime_config: 1cf56d1eab14655802bb208fcd4ed75fe14c862c
   pricing_config: 8d7b051110a9a56a2eb57d502423d952e9be438d
-  benchmark_manifest: 25c95c34a353fcb0250d4e3b4f5f2705a968c342
+  benchmark_manifest: 18303798e411ec560442f09d6179f51d72e81f02
   benchmark_materialization: 0f4e4f18fd7adef4d1ffc10c6e06aa2cd60ec459
