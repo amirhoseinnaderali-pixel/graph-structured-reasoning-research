@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["experiment_id", "run_id", "task_id", "candidate_id", "aggregation_method", "representation_method", "seed", "objective_result", "generation_tokens", "embedding_latency_ms", "similarity_latency_ms", "representation_latency_ms", "graph_construction_latency_ms", "graph_scoring_latency_ms", "aggregation_latency_ms", "verification_latency_ms"],
+  "properties": {
+    "experiment_id": {"const": "EXP-001"},
+    "run_id": {"type": "string"},
+    "task_id": {"type": "string"},
+    "candidate_id": {"type": "string"},
+    "aggregation_method": {"type": "string"},
+    "representation_method": {"type": "string"},
+    "graph_method": {"type": ["string", "null"]},
+    "seed": {"type": "integer"},
+    "objective_result": {"type": "string"},
+    "generation_tokens": {"type": "integer"},
+    "aggregation_latency_ms": {"type": "number"},
+    "verification_latency_ms": {"type": "number"}
+  }
+}

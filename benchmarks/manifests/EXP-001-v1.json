@@ -1,0 +1,23 @@
+{
+  "manifest_version": "1",
+  "experiment_id": "EXP-001",
+  "benchmark_status": "UNFROZEN",
+  "benchmark_type": "programming",
+  "provenance": {
+    "family": "HumanEval-derived programming benchmark",
+    "source_uri": "UNSET",
+    "source_version": "UNSET",
+    "materialization_commit": "UNSET"
+  },
+  "selection_policy": {
+    "visible_information_only": true,
+    "hidden_tests_allowed_during_selection": false
+  },
+  "evaluation_policy": {
+    "visible_tests": "selection_only",
+    "hidden_tests": "evaluation_only",
+    "verifier_independent_of_graph": true
+  },
+  "task_count": 0,
+  "tasks": []
+}

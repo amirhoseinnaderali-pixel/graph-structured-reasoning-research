@@ -1,0 +1,25 @@
+experiment_id: EXP-001
+title: Controlled Graph Aggregation Benchmark
+status: NOT_EXECUTED
+mode_policy:
+  real_execution_enabled: false
+  mock_allowed: true
+benchmark_manifest: benchmarks/manifests/EXP-001-v1.json
+candidate_generator_config: configs/models/EXP-001.yaml
+budget_config: configs/budgets/EXP-001.yaml
+graph_config: configs/graph/EXP-001.yaml
+seeds: [42, 43, 44]
+candidate_count: 5
+primary_baselines:
+  - first_candidate
+  - random_candidate
+  - consensus
+  - similarity_ranking
+  - objective_verification
+primary_graph:
+  builder: threshold
+  scoring: weighted_degree
+ablations:
+  graph_builders: [threshold, knn]
+  edge_modes: [weighted, unweighted]
+  scoring_methods: [weighted_degree, degree_centrality, pagerank, local_neighborhood_agreement]
