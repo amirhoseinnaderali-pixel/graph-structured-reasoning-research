@@ -288,6 +288,10 @@ def run_real(
                 int(seed),
                 entry_point=task["entry_point"],
             )
+            if float(generation.get("latency_ms", 0.0)) > float(
+                budget_cfg["candidate_generation"]["max_wall_time_ms"]
+            ):
+                raise RuntimeError("budget_ineligibility: candidate generation wall-clock budget exceeded")
             ledger.record_candidates(len(candidate_set.candidates))
             if len(candidate_set.candidates) != int(config["candidate_count"]):
                 raise RuntimeError("budget_ineligibility: candidate count mismatch")
@@ -296,6 +300,10 @@ def run_real(
             ledger.reserve_representation(calls=1)
             representation = representation_provider.encode(candidate_set)
             representation_latency_ms = (time.perf_counter() - representation_started) * 1000.0
+            if representation_latency_ms > float(
+                budget_cfg["representation"]["max_wall_time_ms"]
+            ):
+                raise RuntimeError("budget_ineligibility: representation wall-clock budget exceeded")
 
             similarity_started = time.perf_counter()
             similarity = cosine_similarity_matrix(representation.embeddings)
@@ -364,6 +372,10 @@ def run_real(
                     selected_c5 = cid
                     break
             visible_latency_ms = (time.perf_counter() - visible_started) * 1000.0
+            if visible_latency_ms > float(
+                budget_cfg["verification"]["max_wall_time_ms"]
+            ):
+                raise RuntimeError("budget_ineligibility: visible verification wall-clock budget exceeded")
             c5_selection = Selection(
                 "graph+objective_verification",
                 selected_c5,
@@ -433,6 +445,10 @@ def run_real(
                 hidden_started = time.perf_counter()
                 hidden_eval_result = verifier.evaluate_hidden(hidden_candidate)
                 hidden_latency_ms = (time.perf_counter() - hidden_started) * 1000.0
+                if hidden_latency_ms > float(
+                    budget_cfg["verification"]["max_wall_time_ms"]
+                ):
+                    raise RuntimeError("budget_ineligibility: hidden verification wall-clock budget exceeded")
                 if hidden_eval_result.objective_result == "INFRASTRUCTURE_ERROR":
                     raise RuntimeError(
                         f"verification infrastructure failure: {hidden_eval_result.failure_class}"
