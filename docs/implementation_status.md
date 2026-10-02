@@ -1,32 +1,32 @@
 # Implementation Status
 
-## Current status
+## State machine
 
-**IMPLEMENTED / SCIENTIFICALLY AUDITED / NOT EXECUTED**
+1. IMPLEMENTED — execution architecture and scientific controls exist in source.
+2. VALIDATED — automated tests and mock path pass.
+3. SCIENTIFICALLY AUDITED — frozen inputs, hashes, hidden-test isolation, result schema, and budget/runtime gates pass audit.
+4. READY FOR REAL EXECUTION — the repository can launch the real model/runtime path after environment preflight.
+5. REAL SMOKE PASSED — one frozen task/seed completes the genuine model → representation → graph → visible/hidden verifier path; artifact is validation-only.
+6. EXP-001 EXECUTED — all frozen EXP-001 tasks/seeds complete and immutable raw results exist.
 
-The repository contains the controlled EXP-001 framework, candidate-set equivalence enforcement, explicit representation and graph configuration hashes, non-graph baselines, independent objective-verification interfaces, fixed-budget accounting, isolated Docker verification, result schemas, validation-only mock execution, and fail-closed preflight/audit gates.
+The repository must never collapse these states into complete.
 
-## External blockers
+## Current implementation
 
-Real execution is not currently ready because:
+- Frozen 12-task benchmark with source, task, visible-test, hidden-test, and materialization hashes.
+- Frozen candidate generator and deterministic local representation.
+- Candidate-set hash enforced once per task/seed and reused by all conditions.
+- Shared representation artifact reused by similarity and graph conditions.
+- Hidden tests are attached only to verifier inputs after selection.
+- Primary C0-C5 conditions and a 16-cell C6 graph ablation factorial are implemented.
+- Docker verifier is pinned and hardened.
+- Budget counters are checked before generation, representation, verification, and graph operations.
+- Real and mock adapters are explicitly separated.
+- Raw result artifacts use exclusive file creation and include environment/config/benchmark hashes.
+- Real smoke artifacts are stored separately under results/smoke_test/.
 
-1. The benchmark manifest is intentionally `UNFROZEN`; the exact source/version/task material has not been verified and frozen.
-2. The candidate-generation model ID/revision is `UNFROZEN`.
-3. The embedding model ID/revision is `UNFROZEN`.
-4. The immutable Docker image digest is `UNFROZEN`.
-5. Required model credentials are not configured.
-6. Docker CLI/daemon is unavailable in the current environment.
+## External environment gates
 
-Pricing is explicitly `UNAVAILABLE`; monetary cost is therefore not reported.
+The repository cannot claim a real smoke or EXP-001 run until the actual environment has OPENAI_API_KEY, a reachable Docker daemon, access to the pinned runtime image, and access to the configured model API.
 
-## Evidence actually executed
-
-- Unit/integration tests: executed locally and passed.
-- Configuration validation: executed and passed.
-- Mock EXP-001: executed end-to-end and produced only `validation_only` records.
-- Preflight: executed and correctly blocked real execution on the external blockers above.
-- Scientific audit: executed and correctly reported the same readiness blockers.
-- Real smoke test: defined but not executed because preflight is not ready.
-- Full EXP-001: not executed.
-
-No mock or smoke-test artifact is presented as scientific evidence.
+Failure of any of these gates must stop the run before candidate generation.
