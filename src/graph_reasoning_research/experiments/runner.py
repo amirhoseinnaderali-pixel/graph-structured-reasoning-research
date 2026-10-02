@@ -189,7 +189,8 @@ def run_mock(config: dict, output_path: str | Path) -> list[dict]:
     tasks = [("mock-001", "return 1"), ("mock-002", "return 0")]
     for seed in config["seeds"]:
         for task_id, problem in tasks:
-            candidate_set, generation = generator.generate(task_id, problem, config["candidate_count"], seed)
+            candidate_set = generator.generate(task_id, problem, config["candidate_count"], seed)
+            generation = {"provider":"mock","model_id":generator.model_id,"calls":1,"prompt_tokens":0,"completion_tokens":0,"total_tokens":0,"latency_ms":0.0,"validation_only":True}
             representation = representation_provider.encode(candidate_set)
             similarity = cosine_similarity_matrix(representation.embeddings)
             graph = threshold_graph(candidate_set.ids(), similarity, 0.25, True)
@@ -205,6 +206,7 @@ def run_mock(config: dict, output_path: str | Path) -> list[dict]:
                 "selected_candidate_id": selection.selected_candidate_id,
                 "status": "validation_only",
                 "generation": generation,
+                "metadata": {"validation_only": True},
             })
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
