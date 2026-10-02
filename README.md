@@ -1,5 +1,11 @@
 # Graph-Structured Reasoning Research
 
+### Portfolio status
+
+**REGISTERED — HISTORICAL EXPLORATORY CASE STUDY**
+
+The preserved historical graph_reasoning artifacts are sufficient to document graph construction, similarity/dependency structure, and community formation, but they do not establish downstream task-accuracy improvement or graph-selection superiority. The current hardened EXP-001 is a future instrument and is not claimed as executed.
+
 Project 4 studies one focused question:
 
 > **Does explicitly modeling relationships between multiple reasoning trajectories as a graph improve final candidate selection compared with simpler aggregation methods, under the same candidate set?**
