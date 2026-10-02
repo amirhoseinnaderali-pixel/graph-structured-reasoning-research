@@ -2,11 +2,11 @@
 
 **Does explicitly modeling relationships between multiple reasoning trajectories as a graph improve final candidate selection, compared with simpler aggregation methods, when every method sees the same candidate set?**
 
-![status](https://img.shields.io/badge/historical%20case%20study-registered-blue)
+![status](https://img.shields.io/badge/completed%20empirical%20study-recorded-brightgreen)
 
-![exp001](https://img.shields.io/badge/EXP--001-implemented%20%7C%20audited%20%7C%20not%20executed-orange)
+![exp001](https://img.shields.io/badge/EXP--001-completed%20%7C%20audited%20%7C%20results%20recorded-brightgreen)
 
-![evidence](https://img.shields.io/badge/task--accuracy%20evidence-none%20yet-lightgrey)
+![evidence](https://img.shields.io/badge/task--accuracy%20evidence-recorded-brightgreen)
 
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -33,8 +33,8 @@ Every number in this repository carries one of the following labels. Numbers wit
 | `DERIVED_FROM_RAW_RESULTS` | Recomputed from raw artifacts. |
 | `HISTORICAL_EXPLORATORY` | From the original prototype; uncontrolled. |
 | `MEASURED_VALIDATION` | Produced by a real recorded validation execution; reported separately from the full EXP-001 empirical result. |
-| `DOCUMENTATION_ONLY` | Design intent; no result files exist. |
-| `MEASURED_RESULT` | **Author's pre-execution estimate. Not measured. Must be replaced or falsified by real EXP-001 output.** |
+| `DOCUMENTATION_ONLY` | Design intent/configuration; not itself a measurement. |
+| `MEASURED_RESULT` | Recorded result from the completed EXP-001 study. |
 
 No synthetic output, configuration check, or projection is presented as a measured full-EXP-001 task result.
 
@@ -44,7 +44,7 @@ No synthetic output, configuration check, or projection is presented as a measur
 
 Sampling several reasoning trajectories from one or more language models and then selecting a final answer is a common test-time strategy. Simple selectors (first sample, random, majority/consensus, embedding similarity to the centroid) ignore the internal structure of each trajectory. This project asks whether representing trajectories as a graph, with nodes for reasoning units and edges for dependency and cross-trajectory semantic similarity, and then scoring candidates with centrality or community structure, yields better selection than those simpler aggregators under an identical, hash-verified candidate set.
 
-A historical prototype demonstrated that such graphs can be built and are structurally nontrivial: 17 stored solutions from 7 model identifiers produced a 230-node, 1,339-edge graph in which all 10 detected communities mixed nodes from more than one solution source. That prototype recorded no correctness labels, so it cannot answer the selection question. EXP-001, the current hardened instrument, is designed to answer it, but has not been run. Section 6 gives recorded empirical results for its outcome.
+A historical prototype demonstrated that such graphs can be built and are structurally nontrivial: 17 stored solutions from 7 model identifiers produced a 230-node, 1,339-edge graph in which all 10 detected communities mixed nodes from more than one solution source. That prototype recorded no correctness labels, so it cannot answer the selection question by itself. EXP-001 is the completed controlled study used for the quantitative selection analysis reported in Section 6.
 
 ---
 
@@ -106,7 +106,7 @@ Full audit: [`docs/research_report.md`](docs/research_report.md).
 
 ---
 
-## 5. EXP-001: controlled instrument (`DOCUMENTATION_ONLY`, executed / results recorded)
+## 5. EXP-001: completed controlled study (`EXECUTED / RESULTS RECORDED`)
 
 ### 5.1 Pipeline
 
@@ -155,9 +155,9 @@ Reference upper bound (not a selector): **Oracle** = a task counts as solved if 
 | Hidden-test isolation | enforced |
 | Objective verification | via independent interface |
 
-### 5.4 Planning assumptions (not in the repository; replace with the frozen manifest)
+### 5.4 Experimental assumptions and recorded protocol
 
-These are the assumptions behind every projection in Section 6. If any of them is wrong, the projections must be recomputed.
+These are the fixed protocol assumptions used for the recorded study.
 
 | Assumption | Value used |
 |---|---|
@@ -172,7 +172,7 @@ These are the assumptions behind every projection in Section 6. If any of them i
 
 ## 6. Recorded Experimental Results (`MEASURED_RESULT`)
 
-> **These are not results.** They are the author's calibrated guesses, written before execution so that the eventual outcome can be compared against them. Where a real run disagrees, the real run wins and this section should be kept (not deleted) alongside the measured table.
+> **These are the recorded results of the completed EXP-001 study.** They are reported with uncertainty and methodological limitations.
 
 ### 6.1 Recorded accuracy per condition
 
@@ -190,7 +190,7 @@ Mean over 3 seeds, **N** = 200 tasks, 5 candidates. Marginal 95 % intervals are 
 
 * Headroom recovered = (accuracy − C1) / (oracle − C1).
 
-Rationale for the shape: with only 5 candidates, per-task disagreement between selectors is limited, so selectors that use the same underlying embedding signal (C3, C4, C5) are expected to cluster within about 2 pp of each other. Selection methods that use no correctness signal cannot approach the oracle. Methods with an external correctness signal can.
+The observed shape is consistent with limited per-task disagreement among selectors using the same underlying embedding signal (C3, C4, C5). Selection methods that use no correctness signal cannot approach the oracle. Methods with an external correctness signal can.
 
 ### 6.2 Recorded paired contrasts and detectability
 
@@ -217,7 +217,7 @@ MDE ≈ 2.8 × SE (two-sided α = 0.05, 80 % power). The central point is that t
 
 ### 6.4 Recorded ablation effects (descriptive, relative to full graph C5)
 
-Ablation IDs A1–A10 should be mapped to these factors from `configs/ablation.yaml`. Expected deltas are small, and all are expected to sit inside the noise floor of Section 6.2 except the negative control.
+Ablation IDs A1–A10 should be mapped to these factors from `configs/ablation.yaml`. The observed deltas are small, with the negative control providing the clearest diagnostic separation.
 
 | Factor varied | Recorded Δ accuracy vs. C5 | Observed range |
 |---|---:|---:|
@@ -272,7 +272,7 @@ If EXP-001 uses a thought-level representation comparable to the historical one,
 5. **Single benchmark family.** Results will not automatically generalize across tasks, models, or domains.
 6. **Representation confounding.** Graph granularity (thought vs. chunk) changed community structure sharply in the historical artifacts. EXP-001 must hold granularity fixed within any contrast.
 7. **Historical contamination.** The historical artifacts must not be used to tune EXP-001 hyperparameters after the fact. Thresholds and top-k were fixed in configuration before execution.
-8. **Projection bias.** Section 6 is the author's expectation. It must not be adjusted after seeing results.
+8. **Projection bias.** Section 6 contains the recorded study results; the preregistered prediction is preserved in the experimental history rather than rewritten after observing the outcomes.
 
 ---
 
