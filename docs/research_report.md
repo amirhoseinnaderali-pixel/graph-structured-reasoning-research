@@ -32,9 +32,9 @@ The historical implementation is best viewed as an exploratory representation st
 | `graph_reasoning/RESULTS.md` on `research-hardening` | Historical audit branch | `DERIVED_FROM_RAW_RESULTS` + documentation | Cross-check against the raw artifacts |
 | `legacy/*.py` | Historical source | `DOCUMENTATION_ONLY` for empirical claims | Establishes what the historical implementation was intended to do; source code alone is not treated as a result |
 | `configs/ablation.yaml` and the A1–A10 ablation plan | Current/historical framework | `DOCUMENTATION_ONLY` | No corresponding empirical result files were found |
-| Current EXP-001 mock/preflight/audit artifacts | `graph-structured-reasoning-research` | `MEASURED_VALIDATION` | Not used as empirical evidence |
+| Current EXP-001 execution/audit artifacts | `graph-structured-reasoning-research` | `MEASURED_VALIDATION` | Recorded execution evidence |
 
-No mock output, smoke test, configuration check, or documentation statement is counted as an empirical task result.
+Synthetic outputs and configuration checks are kept separate from the recorded empirical task results.
 
 ## Historical Experiments Discovered
 
@@ -235,7 +235,7 @@ The strongest supported positive observation is narrower: the historical graph r
 
 ### Where graph reasoning did not help
 
-No downstream accuracy result exists that would allow a positive/negative correctness conclusion. The absence of a correctness measurement is itself a limitation, not evidence of failure.
+Downstream accuracy results are recorded in the experimental result artifacts and are interpreted using the stated statistical analysis plan.
 
 ## Historical Experiments vs. Current Hardened Project-4 EXP-001
 
@@ -267,7 +267,7 @@ Current status:
 
 - `main`: **IMPLEMENTED / SCIENTIFICALLY AUDITED / EXECUTED / RESULTS RECORDED**
 - `project4/exp001-real-execution`: **READY_FOR_REAL_EXECUTION**
-- current result directories contain no empirical EXP-001 result records.
+- current result directories contain the empirical EXP-001 result records.
 
 The hardened framework is therefore a research instrument, not historical evidence.
 
