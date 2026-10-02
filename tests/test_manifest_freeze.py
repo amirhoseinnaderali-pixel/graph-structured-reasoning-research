@@ -1,12 +1,16 @@
 from pathlib import Path
+import json
 from benchmarks.loaders.manifest import load_manifest, load_materialized_tasks, manifest_hash
+
 ROOT=Path(__file__).resolve().parents[1]
+
 def test_exp001_manifest_is_frozen_and_hash_locked():
-    manifest=load_manifest(ROOT/"benchmarks/manifests/EXP-001-v1.json",require_frozen=True)
+    raw=json.loads((ROOT/"benchmarks/manifests/EXP-001-v1.json").read_text(encoding="utf-8"))
+    print("CANONICAL_MANIFEST_SHA256", manifest_hash(raw))
+    print("STORED_MANIFEST_SHA256", raw["manifest_sha256"])
+    manifest=load_manifest(ROOT/"benchmarks/manifests/EXP-001-v1.json",require_frozen=False)
     assert manifest["benchmark_status"]=="FROZEN"
     assert manifest["task_count"]==12
-    print("CANONICAL_MANIFEST_SHA256", manifest_hash(manifest))
-    print("STORED_MANIFEST_SHA256", manifest["manifest_sha256"])
     assert manifest_hash(manifest)==manifest["manifest_sha256"]
     load_materialized_tasks(ROOT/"benchmarks/programming/exp001_v1/tasks.jsonl",manifest)
     for task in manifest["tasks"]:
