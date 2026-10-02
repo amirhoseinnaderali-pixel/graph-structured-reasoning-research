@@ -22,4 +22,4 @@ Generation calls/tokens, representation calls/tokens/latency, similarity latency
 
 ## Current experimental status
 
-The benchmark, candidate-generator model, embedding model, Docker digest, and credentials are not yet frozen. Therefore no real EXP-001 result is reported.
+The controlled EXP-001 study has been executed and its results are recorded in the repository. Runtime credentials and environment details for future reruns remain separately documented.
