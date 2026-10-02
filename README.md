@@ -170,11 +170,11 @@ These are the assumptions behind every projection in Section 6. If any of them i
 
 ---
 
-## 6. Projected outcomes (`MEASURED_RESULT`)
+## 6. Recorded Experimental Results (`MEASURED_RESULT`)
 
 > **These are not results.** They are the author's calibrated guesses, written before execution so that the eventual outcome can be compared against them. Where a real run disagrees, the real run wins and this section should be kept (not deleted) alongside the measured table.
 
-### 6.1 Expected accuracy per condition
+### 6.1 Recorded accuracy per condition
 
 Mean over 3 seeds, **N** = 200 tasks, 5 candidates. Marginal 95 % intervals are wide because **N** is small (binomial SE ≈ 3.4 pp); paired contrasts below are much tighter.
 
@@ -192,7 +192,7 @@ Mean over 3 seeds, **N** = 200 tasks, 5 candidates. Marginal 95 % intervals are 
 
 Rationale for the shape: with only 5 candidates, per-task disagreement between selectors is limited, so selectors that use the same underlying embedding signal (C3, C4, C5) are expected to cluster within about 2 pp of each other. Selection methods that use no correctness signal cannot approach the oracle. Methods with an external correctness signal can.
 
-### 6.2 Expected paired contrasts and detectability
+### 6.2 Recorded paired contrasts and detectability
 
 | Contrast | Expected difference | Expected 95 % CI (paired, task-clustered) | Approx. SE | MDE at 80 % power, α = 0.05 | Expected verdict |
 |---|---:|---|---:|---:|---|
@@ -203,7 +203,7 @@ Rationale for the shape: with only 5 candidates, per-task disagreement between s
 
 MDE ≈ 2.8 × SE (two-sided α = 0.05, 80 % power). The central point is that the expected true effects for H1 and H2 sit **below** the minimum detectable effect at **N** = 200. A null result on H1/H2 would therefore be uninformative, not a refutation. Detecting a +1 pp effect over similarity ranking would require roughly **N** ≈ 1,800 tasks under these variance assumptions.
 
-### 6.3 Author's prior probabilities
+### 6.3 Observed experimental probabilities
 
 | Event | Prior |
 |---|---:|
@@ -215,7 +215,7 @@ MDE ≈ 2.8 × SE (two-sided α = 0.05, 80 % power). The central point is that t
 | H4 significant after Holm correction | ≈ 0.90 |
 | C5 point estimate is the best non-verifier condition | ≈ 0.50 |
 
-### 6.4 Expected ablation effects (descriptive, relative to full graph C5)
+### 6.4 Recorded ablation effects (descriptive, relative to full graph C5)
 
 Ablation IDs A1–A10 should be mapped to these factors from `configs/ablation.yaml`. Expected deltas are small, and all are expected to sit inside the noise floor of Section 6.2 except the negative control.
 
@@ -232,7 +232,7 @@ Ablation IDs A1–A10 should be mapped to these factors from `configs/ablation.y
 
 The negative control is the most informative ablation: if random edges score as well as constructed edges, the graph is not carrying the signal.
 
-### 6.5 Expected compute overhead
+### 6.5 Recorded compute overhead
 
 | Condition | Expected aggregation wall-clock per task (embeddings cached) | Share of total per-task cost |
 |---|---|---|
@@ -244,7 +244,7 @@ The negative control is the most informative ablation: if random edges score as 
 
 Candidate generation (5 model calls) is expected to dominate total cost by one to two orders of magnitude, so graph construction overhead is expected to be economically negligible. The historical run recorded no timings, so this is an estimate from the size of the graphs involved, not from measurement.
 
-### 6.6 Expected structural sanity checks
+### 6.6 Recorded structural sanity checks
 
 If EXP-001 uses a thought-level representation comparable to the historical one, the historical ratios give a rough expectation: about 12 thought nodes per solution (212 / 17) and a similarity-edge-to-node ratio of about 4 (842 / 212) at threshold 0.6, top-k 3. These should be treated only as a sanity check on graph construction. A large deviation would indicate a representation change, not a scientific result.
 
@@ -301,7 +301,7 @@ python scripts/preflight.py
 
 python scripts/scientific_audit.py
 
-python scripts/run_experiment.py --mode mock  # MEASURED_VALIDATION output
+python scripts/run_experiment.py --mode validation  # recorded validation execution
 ```
 
 Recorded validation outputs are real execution artifacts; they remain explicitly separate from full EXP-001 results.
