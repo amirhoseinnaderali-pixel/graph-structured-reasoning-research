@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -67,6 +68,32 @@ def validate_bundle(root: str | Path, config: dict[str, Any]) -> list[str]:
         load_materialized_tasks(materialized, manifest)
     except Exception as exc:
         failures.append(f"benchmark validation: {exc}")
+
+    frozen_blobs = config.get("frozen_input_blob_shas", {})
+    frozen_paths = {
+        "candidate_generator_config": config["candidate_generator_config"],
+        "representation_config": config["representation_config"],
+        "graph_config": config["graph_config"],
+        "budget_config": config["budget_config"],
+        "runtime_config": config["runtime_config"],
+        "pricing_config": config["pricing_config"],
+        "benchmark_manifest": config["benchmark_manifest"],
+        "benchmark_materialization": "benchmarks/programming/exp001_v1/tasks.jsonl",
+    }
+    for key, relative_path in frozen_paths.items():
+        expected_blob = frozen_blobs.get(key)
+        if not expected_blob:
+            failures.append(f"missing frozen blob SHA: {key}")
+            continue
+        try:
+            observed_blob = subprocess.check_output(
+                ["git", "hash-object", str(root / relative_path)],
+                text=True,
+            ).strip()
+            if observed_blob != expected_blob:
+                failures.append(f"frozen blob SHA mismatch: {key}")
+        except Exception as exc:
+            failures.append(f"unable to hash frozen input {key}: {exc}")
 
     models = load_yaml(root / config["candidate_generator_config"])
     representation = load_yaml(root / config["representation_config"])
