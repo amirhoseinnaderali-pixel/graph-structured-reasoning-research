@@ -1,23 +1,520 @@
 {
-  "manifest_version": "1",
+  "manifest_version": "1.0",
   "experiment_id": "EXP-001",
-  "benchmark_status": "UNFROZEN",
+  "benchmark_status": "FROZEN",
   "benchmark_type": "programming",
+  "benchmark_id": "humaneval-project4-stratified-12-v1",
+  "source_benchmark_id": "humaneval-stratified-100-v1",
+  "task_count": 12,
+  "hash_algorithm": "sha256",
   "provenance": {
-    "family": "HumanEval-derived programming benchmark",
-    "source_uri": "UNSET",
-    "source_version": "UNSET",
-    "materialization_commit": "UNSET"
+    "canonical_source": "openai/human-eval",
+    "canonical_source_url": "https://github.com/openai/human-eval",
+    "source_commit": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+    "source_archive_sha256": "b796127e635a67f93fb35c04f4cb03cf06f38c8072ee7cee8833d7bee06979ef",
+    "parent_project3_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+    "materialization_rule": "12-category stratified subset; first eligible source-order task per category; category selection is frozen before execution"
   },
   "selection_policy": {
-    "visible_information_only": true,
-    "hidden_tests_allowed_during_selection": false
+    "type": "first_eligible_per_category",
+    "categories": [
+      "arrays_lists",
+      "parsing",
+      "arithmetic",
+      "strings",
+      "sorting",
+      "dynamic_programming",
+      "general",
+      "recursion",
+      "graph",
+      "hash_maps",
+      "greedy",
+      "searching"
+    ],
+    "exclude_tasks_with_fewer_than_two_top_level_asserts": true,
+    "no_task_substitution_after_freeze": true
   },
-  "evaluation_policy": {
-    "visible_tests": "selection_only",
-    "hidden_tests": "evaluation_only",
-    "verifier_independent_of_graph": true
+  "evaluation_split_policy": {
+    "type": "source_locked_assertion_split_from_project3",
+    "visible_rule": "frozen visible assertion suite copied from Project-3 materialization",
+    "hidden_rule": "frozen hidden assertion suite copied from Project-3 materialization",
+    "hidden_information_never_available_to_generation_or_selection": true,
+    "no_objective_selection_on_hidden": true
   },
-  "task_count": 0,
-  "tasks": []
+  "selection_visibility": {
+    "candidate_generation": "problem statement only",
+    "representation": "candidate text only",
+    "graph_construction": "representation artifact only",
+    "graph_scoring": "graph artifact only",
+    "visible_verification": "visible tests only",
+    "hidden_evaluation": "selected candidate only after selection"
+  },
+  "tasks": [
+    {
+      "task_id": "HumanEval/0",
+      "category": "arrays_lists",
+      "entry_point": "has_close_elements",
+      "problem": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\nfrom typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.3) == True\npass\npass\npass\npass\npass\npass",
+          "pass\nassert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.05) == False\npass\npass\npass\npass\npass",
+          "pass\npass\nassert candidate([1.0, 2.0, 5.9, 4.0, 5.0], 0.95) == True\npass\npass\npass\npass",
+          "pass\npass\npass\nassert candidate([1.0, 2.0, 5.9, 4.0, 5.0], 0.8) == False\npass\npass\npass"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\npass\npass\nassert candidate([1.0, 2.0, 3.0, 4.0, 5.0, 2.0], 0.1) == True\npass\npass",
+          "pass\npass\npass\npass\npass\nassert candidate([1.1, 2.2, 3.1, 4.1, 5.1], 1.0) == True\npass",
+          "pass\npass\npass\npass\npass\npass\nassert candidate([1.1, 2.2, 3.1, 4.1, 5.1], 0.5) == False"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "2da8332d930287ef3fe694a393c2fa141550889ac384b45ced0ec5678de9419f",
+      "visible_test_hash": "6a68a3b7528da43e9adad3aee82a8fbc568b1e50707d4de0ee6acae68065d498",
+      "hidden_test_hash": "915d97673622e45abebd828de844d5b7824ca9712c16aa51e65c041ae5663355",
+      "source_provenance": {
+        "source_task_sha256": "2db887a9b65af0fab0fdb174e1a5740851303ca629420c5bfc9d90895bd242ed",
+        "source_test_sha256": "791458a53402434f50698418c76887cf4085c7d1a2453b4da493237c50ef96c5"
+      }
+    },
+    {
+      "task_id": "HumanEval/1",
+      "category": "parsing",
+      "entry_point": "separate_paren_groups",
+      "problem": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\nfrom typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate('(()()) ((())) () ((())()())') == ['(()())', '((()))', '()', '((())()())']\npass\npass\npass",
+          "pass\nassert candidate('() (()) ((())) (((())))') == ['()', '(())', '((()))', '(((())))']\npass\npass"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\nassert candidate('(()(())((())))') == ['(()(())((())))']\npass",
+          "pass\npass\npass\nassert candidate('( ) (( )) (( )( ))') == ['()', '(())', '(()())']"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "ba0f9f385d49e60a3bcd51448b469f9b024daddbc03b9119605b452dcd9359bb",
+      "visible_test_hash": "33affc3225587b91a3e73f9928903d2440beefdf4c7dbdbb94fac7eed5629915",
+      "hidden_test_hash": "880c788bd995cce95f8e5a2238f394eff40645b745ff9dee3396bb55ed800a03",
+      "source_provenance": {
+        "source_task_sha256": "67fe264f812059cab8d56e060688bd1db0855da10489c8f39280b0a7dc97cb44",
+        "source_test_sha256": "eec0f175849e317e04b8e983c48cc25e50da543975e7163939da0fd6b6c14f9c"
+      }
+    },
+    {
+      "task_id": "HumanEval/2",
+      "category": "arithmetic",
+      "entry_point": "truncate_number",
+      "problem": "\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n\n\ndef truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate(3.5) == 0.5\npass\npass",
+          "pass\nassert abs(candidate(1.33) - 0.33) < 1e-06\npass"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\nassert abs(candidate(123.456) - 0.456) < 1e-06"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "279b5bff8ecd4c594744f137043c44f4db13f64becdd7dfeb095e08c803d7c59",
+      "visible_test_hash": "f11217e94de42609a5c0c3773b728270ea999e43a2dbcc5c1708851edcfda084",
+      "hidden_test_hash": "cae969f4f984621f6249e344bf32d6504a944cc225d56c302044fdea46df9300",
+      "source_provenance": {
+        "source_task_sha256": "4dc92f64b805feaef9478be91e43ccb48eac700ae3a49c2477497e1edc69d959",
+        "source_test_sha256": "6a39b8fb5ea92472f27a2b8b305abe517547f20a3cd824f4de73fb7e0f4b7934"
+      }
+    },
+    {
+      "task_id": "HumanEval/7",
+      "category": "strings",
+      "entry_point": "filter_by_substring",
+      "problem": "from typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\nfrom typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate([], 'john') == []\npass\npass\npass",
+          "pass\nassert candidate(['xxx', 'asd', 'xxy', 'john doe', 'xxxAAA', 'xxx'], 'xxx') == ['xxx', 'xxxAAA', 'xxx']\npass\npass"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\nassert candidate(['xxx', 'asd', 'aaaxxy', 'john doe', 'xxxAAA', 'xxx'], 'xx') == ['xxx', 'aaaxxy', 'xxxAAA', 'xxx']\npass",
+          "pass\npass\npass\nassert candidate(['grunt', 'trumpet', 'prune', 'gruesome'], 'run') == ['grunt', 'prune']"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "94689af16eec75ab4a95afb426b0f4fc749ca7d1bad9c00078c7d4d06924db26",
+      "visible_test_hash": "179f65eedb81e208029d6481250b8bbe09df3a71dbbda11711a9aaca8cd807be",
+      "hidden_test_hash": "5c0c61bce07a0983970c762ff4069184b7a106804dba423d9cb7c69a2eb01139",
+      "source_provenance": {
+        "source_task_sha256": "acb53323cbeb9b8736a7141ed9e3293b8ff8b7c44182efc0fb5ca2539d706e66",
+        "source_test_sha256": "151e83d8e61801a06d5b4c6813497111954a8e53235d8c484027bfefd057f751"
+      }
+    },
+    {
+      "task_id": "HumanEval/19",
+      "category": "sorting",
+      "entry_point": "sort_numbers",
+      "problem": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\nfrom typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate('') == ''\npass\npass\npass\npass",
+          "pass\nassert candidate('three') == 'three'\npass\npass\npass",
+          "pass\npass\nassert candidate('three five nine') == 'three five nine'\npass\npass"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\npass\nassert candidate('five zero four seven nine eight') == 'zero four five seven eight nine'\npass",
+          "pass\npass\npass\npass\nassert candidate('six five four three two one zero') == 'zero one two three four five six'"
+        ],
+        "setup": "METADATA = {'author': 'jt', 'dataset': 'test'}\n"
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "b1c844b9c029dfdb354e1ca60db056f71039cdbeca7d5cc341a02a64178c1ba1",
+      "visible_test_hash": "66a948576775f3fa9461d71d5c5d21ce74f89fc48dcb337c54b101ba931c2edd",
+      "hidden_test_hash": "f0afffbc4c74281443323953dc2bbfdc2e53bc6e493a4a82f0566c165fa2f976",
+      "source_provenance": {
+        "source_task_sha256": "18b8fd50fc1838ad88e0eee64e39400ed4f704ef688c76b590a33de2497cc192",
+        "source_test_sha256": "02b12e072db771dce79ce0b8fd268527b3e50a733c453e35b08818bd0ad5dcb5"
+      }
+    },
+    {
+      "task_id": "HumanEval/39",
+      "category": "dynamic_programming",
+      "entry_point": "prime_fib",
+      "problem": "\n\ndef prime_fib(n: int):\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n\n\ndef prime_fib(n: int):\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate(1) == 2\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\nassert candidate(2) == 3\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\nassert candidate(3) == 5\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\nassert candidate(4) == 13\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\nassert candidate(5) == 89\npass\npass\npass\npass\npass"
+        ],
+        "setup": "METADATA = {}\n"
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\npass\npass\npass\nassert candidate(6) == 233\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\nassert candidate(7) == 1597\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\nassert candidate(8) == 28657\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\nassert candidate(9) == 514229\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate(10) == 433494437"
+        ],
+        "setup": "METADATA = {}\n"
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "22cbbe80d5d8913d5ad386c85d9393619da8a321e0a29e72836092c5eb108720",
+      "visible_test_hash": "5d33c7d15121145af34c50636fa13d5fb055e26ec19d99b7c2077acc2e63473f",
+      "hidden_test_hash": "7140879c0d8ef9947e6754a5a1fc0572a30d963705c7024f72c368b98662d827",
+      "source_provenance": {
+        "source_task_sha256": "437b3df6db3bd41d19cbe84fcea0231efd17b0ad662cc2055752a00630b0808e",
+        "source_test_sha256": "c47576f016a2575e8c434bd4d2c7c120c0c6f06ac2b7e2d06125b5cac605ee0b"
+      }
+    },
+    {
+      "task_id": "HumanEval/45",
+      "category": "general",
+      "entry_point": "triangle_area",
+      "problem": "\n\ndef triangle_area(a, h):\n    \"\"\"Given length of a side and high return area for a triangle.\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n\n\ndef triangle_area(a, h):\n    \"\"\"Given length of a side and high return area for a triangle.\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate(5, 3) == 7.5\npass\npass",
+          "pass\nassert candidate(2, 2) == 2.0\npass"
+        ],
+        "setup": "METADATA = {}\n"
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\nassert candidate(10, 8) == 40.0"
+        ],
+        "setup": "METADATA = {}\n"
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "c8c08b1250be2edc5cd032b027b3919034c7b29e2c0ab7ce6afcabacff9ae0a8",
+      "visible_test_hash": "71c9283f54616b69273ca90adaea7f295a4414fbaed06153b84ce5cf7194ff06",
+      "hidden_test_hash": "6a29979e8b2b34559ac1784ebb3bfeb1f646de3ea84d916edab3082597ad5146",
+      "source_provenance": {
+        "source_task_sha256": "b74616da76e7ebd443b6ea7a4e6a0675021ae34e65739119062bdbf6f275d408",
+        "source_test_sha256": "24e8272f67a53880ba8102c62c930157c27a0a1124423b4221a0c37c8fefe736"
+      }
+    },
+    {
+      "task_id": "HumanEval/46",
+      "category": "recursion",
+      "entry_point": "fib4",
+      "problem": "\n\ndef fib4(n: int):\n    \"\"\"The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fib4(0) -> 0\n    fib4(1) -> 0\n    fib4(2) -> 2\n    fib4(3) -> 0\n    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\n    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n\n\ndef fib4(n: int):\n    \"\"\"The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fib4(0) -> 0\n    fib4(1) -> 0\n    fib4(2) -> 2\n    fib4(3) -> 0\n    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\n    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate(5) == 4\npass\npass\npass",
+          "pass\nassert candidate(8) == 28\npass\npass"
+        ],
+        "setup": "METADATA = {}\n"
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\nassert candidate(10) == 104\npass",
+          "pass\npass\npass\nassert candidate(12) == 386"
+        ],
+        "setup": "METADATA = {}\n"
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "10ceaf524b205dfddc4c06aa46855a1f5e5c85a10077969650d1bf748a71ff64",
+      "visible_test_hash": "4efb9def31e22b941125d4e57b2d4c0f303eaf18e389f74d5ff4e69739937a5b",
+      "hidden_test_hash": "b7b71c38bce1e3e34c14a3612d81b6bbf2ae0c2e363c922f6b5ce25530aec91b",
+      "source_provenance": {
+        "source_task_sha256": "bd4677f6362b2b0dd22a423fcfc530489cd039ed6d30a9ffe26697ee30e1cf8b",
+        "source_test_sha256": "cacc4db82032770f0ba256e829e2da1e9573df5662f24d3691383d8ed9ffc953"
+      }
+    },
+    {
+      "task_id": "HumanEval/68",
+      "category": "graph",
+      "entry_point": "pluck",
+      "problem": "\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n\ndef pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index.\n\n    Example 2:\n        Input: [1,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest even value, and 2 has the smallest index. \n\n    Example 3:\n        Input: []\n        Output: []\n    \n    Example 4:\n        Input: [5, 0, 3, 0, 4, 2]\n        Output: [0, 1]\n        Explanation: 0 is the smallest value, but  there are two zeros,\n                     so we will choose the first zero, which has the smallest index.\n\n    Constraints:\n        * 1 <= nodes.length <= 10000\n        * 0 <= node.value\n    \"\"\"\n",
+      "visible_tests": {
+        "assertions": [
+          "assert True, 'This prints if this assert fails 1 (good for debugging!)'\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\nassert candidate([4, 2, 3]) == [2, 1], 'Error'\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\nassert candidate([1, 2, 3]) == [2, 1], 'Error'\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\nassert candidate([]) == [], 'Error'\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\nassert candidate([5, 0, 3, 0, 4, 2]) == [0, 1], 'Error'\npass\npass\npass\npass\npass"
+        ],
+        "setup": ""
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\npass\npass\npass\nassert True, 'This prints if this assert fails 2 (also good for debugging!)'\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\nassert candidate([1, 2, 3, 0, 5, 3]) == [0, 3], 'Error'\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\nassert candidate([5, 4, 8, 4, 8]) == [4, 1], 'Error'\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([7, 6, 7, 1]) == [6, 1], 'Error'\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([7, 9, 7, 1]) == [], 'Error'"
+        ],
+        "setup": ""
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "d476f40a9a382466722c93f491e4bf82adff87dcc5fb80235dc341e252e606c3",
+      "visible_test_hash": "95237bde2b4531e63c2e26ec817b73f5546048afe775d501378a711343ece349",
+      "hidden_test_hash": "5a8a4a9f450bbbe387ffd27bb91c521e10cebc8306c8ef4de4fdd94d5b083b99",
+      "source_provenance": {
+        "source_task_sha256": "6e768eb44e35ba22350f7295eae3e6aeee61d89922a7142b471265065b84604e",
+        "source_test_sha256": "9b838fce3ee1d263bb2f5a88eab37cbbc9bdd991d601a2f470821a5c52c91202"
+      }
+    },
+    {
+      "task_id": "HumanEval/69",
+      "category": "hash_maps",
+      "entry_point": "search",
+      "problem": "\ndef search(lst):\n    '''\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    '''\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n\ndef search(lst):\n    '''\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    The frequency of an integer is the number of times it appears in the list.\n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    '''\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate([5, 5, 5, 5, 1]) == 1\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\nassert candidate([4, 1, 4, 1, 4, 4]) == 4\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\nassert candidate([3, 3]) == -1\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\nassert candidate([8, 8, 8, 8, 8, 8, 8, 8]) == 8\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\nassert candidate([2, 3, 3, 2, 2]) == 2\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\nassert candidate([2, 7, 8, 8, 4, 8, 7, 3, 9, 6, 5, 10, 4, 3, 6, 7, 1, 7, 4, 10, 8, 1]) == 1\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\nassert candidate([3, 2, 8, 2]) == 2\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\nassert candidate([6, 7, 1, 8, 8, 10, 5, 8, 5, 3, 10]) == 1\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([8, 8, 3, 6, 5, 6, 4]) == -1\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([6, 9, 6, 7, 1, 4, 7, 1, 8, 8, 9, 8, 10, 10, 8, 4, 10, 4, 10, 1, 2, 9, 5, 7, 9]) == 1\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([1, 9, 10, 1, 3]) == 1\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([6, 9, 7, 5, 8, 7, 5, 3, 7, 5, 10, 10, 3, 6, 10, 2, 8, 6, 5, 4, 9, 5, 3, 10]) == 5\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([1]) == 1\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass"
+        ],
+        "setup": ""
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([8, 8, 10, 6, 4, 3, 5, 8, 2, 4, 2, 8, 4, 6, 10, 4, 2, 1, 10, 2, 1, 1, 5]) == 4\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([2, 10, 4, 8, 2, 10, 5, 1, 2, 9, 5, 5, 6, 3, 8, 6, 4, 10]) == 2\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([1, 6, 10, 1, 6, 9, 10, 8, 6, 8, 7, 3]) == 1\npass\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([9, 2, 4, 1, 5, 1, 5, 2, 5, 7, 7, 7, 3, 10, 1, 5, 4, 2, 8, 4, 1, 9, 10, 7, 10, 2, 8, 10, 9, 4]) == 4\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([2, 6, 4, 2, 8, 7, 5, 6, 4, 10, 4, 6, 3, 7, 8, 8, 3, 1, 4, 2, 2, 10, 7]) == 4\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([9, 8, 6, 10, 2, 6, 10, 2, 7, 8, 10, 3, 8, 2, 6, 2, 3, 1]) == 2\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([5, 5, 3, 9, 5, 6, 3, 2, 8, 5, 6, 10, 10, 6, 8, 4, 10, 7, 7, 10, 8]) == -1\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([10]) == -1\npass\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([9, 7, 7, 2, 4, 7, 2, 10, 9, 7, 5, 7, 2]) == 2\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([5, 4, 10, 2, 1, 1, 10, 3, 6, 1, 8]) == 1\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([7, 9, 9, 9, 3, 4, 1, 5, 9, 1, 2, 1, 1, 10, 7, 5, 6, 7, 6, 7, 7, 6]) == 1\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\npass\nassert candidate([3, 10, 10, 9, 2]) == -1"
+        ],
+        "setup": ""
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "442255de9f74ad48c616e86ac18617dd9fc5aa06decaa127f49c547a1440e10e",
+      "visible_test_hash": "40d557f2c9d17700792f9db578056fd3646739445ccc9edd982269add9d371ac",
+      "hidden_test_hash": "46d0d3730adf8854dd2ed5b4aae85ff5078d97ec5322ddb92c3bd503d68e88a5",
+      "source_provenance": {
+        "source_task_sha256": "81de6ef8a7863d7482c688e1a9e1b51d3123069b66dff108482b0cf3cede1cf2",
+        "source_test_sha256": "b6c0b227418494a289378b73035980d6102995b82dbd1a268f2135f9fcb94ea1"
+      }
+    },
+    {
+      "task_id": "HumanEval/127",
+      "category": "greedy",
+      "entry_point": "intersection",
+      "problem": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate((1, 2), (2, 3)) == 'NO'\npass\npass\npass\npass\npass\npass\npass",
+          "pass\nassert candidate((-1, 1), (0, 4)) == 'NO'\npass\npass\npass\npass\npass\npass",
+          "pass\npass\nassert candidate((-3, -1), (-5, 5)) == 'YES'\npass\npass\npass\npass\npass",
+          "pass\npass\npass\nassert candidate((-2, 2), (-4, 0)) == 'YES'\npass\npass\npass\npass"
+        ],
+        "setup": ""
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\npass\npass\nassert candidate((-11, 2), (-1, -1)) == 'NO'\npass\npass\npass",
+          "pass\npass\npass\npass\npass\nassert candidate((1, 2), (3, 5)) == 'NO'\npass\npass",
+          "pass\npass\npass\npass\npass\npass\nassert candidate((1, 2), (1, 2)) == 'NO'\npass",
+          "pass\npass\npass\npass\npass\npass\npass\nassert candidate((-2, -2), (-3, -2)) == 'NO'"
+        ],
+        "setup": ""
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "fd263ec1d4d0df3ed53e1071daf7c4b9f50c9d928048d9c75ff1e314bb23e290",
+      "visible_test_hash": "bd1e4b9a5a70c47e12bbd9afb3de8d8fc8f8797f91de79e572a62a2e59720d16",
+      "hidden_test_hash": "1171b6c486dc7f041bfd1c5cf98b54950fdefb79d8225e178104e86e34b00203",
+      "source_provenance": {
+        "source_task_sha256": "3d183b6bb11c87f51c41f593fc88cf7250471e16eaa6d97d91c4b155d1b4f75a",
+        "source_test_sha256": "0b1f26ab992ed059ff047a9d1f96791d04a2bac74e4e6ad3b4d4609b7466f7c2"
+      }
+    },
+    {
+      "task_id": "HumanEval/153",
+      "category": "searching",
+      "entry_point": "Strongest_Extension",
+      "problem": "\ndef Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM. \n    You should find the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    For example, if you are given \"Slices\" as the class and a list of the\n    extensions: ['SErviNGSliCes', 'Cheese', 'StuFfed'] then you should\n    return 'Slices.SErviNGSliCes' since 'SErviNGSliCes' is the strongest extension \n    (its strength is -1).\n    Example:\n    for Strongest_Extension('my_class', ['AA', 'Be', 'CC']) == 'my_class.AA'\n    \"\"\"\n",
+      "candidate_generation_prompt_view": "Implement the Python function described below.\nReturn one complete Python implementation only.\nDo not include markdown fences or explanations.\n\n\ndef Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM. \n    You should find the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    For example, if you are given \"Slices\" as the class and a list of the\n    extensions: ['SErviNGSliCes', 'Cheese', 'StuFfed'] then you should\n    return 'Slices.SErviNGSliCes' since 'SErviNGSliCes' is the strongest extension \n    (its strength is -1).\n    Example:\n    for Strongest_Extension('my_class', ['AA', 'Be', 'CC']) == 'my_class.AA'\n    \"\"\"\n",
+      "visible_tests": {
+        "assertions": [
+          "assert candidate('Watashi', ['tEN', 'niNE', 'eIGHt8OKe']) == 'Watashi.eIGHt8OKe'\npass\npass\npass\npass\npass\npass\npass\npass",
+          "pass\nassert candidate('Boku123', ['nani', 'NazeDa', 'YEs.WeCaNe', '32145tggg']) == 'Boku123.YEs.WeCaNe'\npass\npass\npass\npass\npass\npass\npass",
+          "pass\npass\nassert candidate('__YESIMHERE', ['t', 'eMptY', 'nothing', 'zeR00', 'NuLl__', '123NoooneB321']) == '__YESIMHERE.NuLl__'\npass\npass\npass\npass\npass\npass",
+          "pass\npass\npass\nassert candidate('K', ['Ta', 'TAR', 't234An', 'cosSo']) == 'K.TAR'\npass\npass\npass\npass\npass",
+          "pass\npass\npass\npass\nassert candidate('__HAHA', ['Tab', '123', '781345', '-_-']) == '__HAHA.123'\npass\npass\npass\npass"
+        ],
+        "setup": ""
+      },
+      "hidden_tests": {
+        "assertions": [
+          "pass\npass\npass\npass\npass\nassert candidate('YameRore', ['HhAas', 'okIWILL123', 'WorkOut', 'Fails', '-_-']) == 'YameRore.okIWILL123'\npass\npass\npass",
+          "pass\npass\npass\npass\npass\npass\nassert candidate('finNNalLLly', ['Die', 'NowW', 'Wow', 'WoW']) == 'finNNalLLly.WoW'\npass\npass",
+          "pass\npass\npass\npass\npass\npass\npass\nassert candidate('_', ['Bb', '91245']) == '_.Bb'\npass",
+          "pass\npass\npass\npass\npass\npass\npass\npass\nassert candidate('Sp', ['671235', 'Bb']) == 'Sp.671235'"
+        ],
+        "setup": ""
+      },
+      "provenance": {
+        "benchmark_family": "humaneval-stratified-100-v1",
+        "parent_manifest_git_blob_sha": "502a56f86ab41e7c3b7b805728b48f608b863da1",
+        "selection_rule": "first eligible task in source order for each category in the frozen Project-3 manifest"
+      },
+      "source": "openai/human-eval",
+      "source_version": "6d43fb980f9fee3c892a914eda09951f772ad10d",
+      "task_hash": "cfb7ea3cc6e9c26959660175b67e16f832fbc555e2622a0eb85f21118950434f",
+      "visible_test_hash": "7552bfd9da9d24da965c53e7e803dadcccb81459da747c46cf3110ab5cffdf28",
+      "hidden_test_hash": "7ae7a4e14ed61f1dde57e79c21e8f342d931372b9e40e813c7efe9583a8e3c98",
+      "source_provenance": {
+        "source_task_sha256": "c7a570175b639d4da696a1240630ec7db2787c58df5390ab1d662745c8b17cf7",
+        "source_test_sha256": "c2f5de211ee519ac7a4e4940c309555a656d664d860ce71b50f9262c2b154c93"
+      }
+    }
+  ],
+  "materialization_sha256": "52560aa9252bbb9e10f06ad97df3890cf86dcbabf2fbf41b056ec0eabd57ef35",
+  "manifest_sha256": "dda7194bb907e027b52b33cb749fbfdfa4d479f8e331145aed5012733bbc2d73"
 }

@@ -1,5 +1,10 @@
 experiment_id: EXP-001
 status: FROZEN
+primary:
+  builder: threshold
+  threshold: 0.75
+  weighted: true
+  scoring: weighted_degree
 threshold:
   threshold: 0.75
 knn:
@@ -16,6 +21,7 @@ scoring:
     - degree_centrality
     - pagerank
     - local_neighborhood_agreement
+factorial_ablations: true
 similarity:
   function: cosine
   normalized_embeddings_required: true

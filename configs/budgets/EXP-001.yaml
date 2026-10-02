@@ -1,15 +1,22 @@
 experiment_id: EXP-001
-status: UNFROZEN
+status: FROZEN
+scope: per_task_seed
 candidate_generation:
-  max_candidates: 8
-  max_calls: 8
-  max_tokens: 8192
-  max_wall_time_ms: 300000
+  max_candidates: 5
+  max_calls: 1
+  max_input_tokens: 5000
+  max_output_tokens: 6000
+  max_wall_time_ms: 180000
 representation:
-  max_embedding_calls: 8
-  max_wall_time_ms: 120000
+  max_embedding_calls: 1
+  max_wall_time_ms: 10000
 aggregation:
   max_wall_time_ms: 30000
 verification:
-  max_executions: 8
-  max_wall_time_ms: 120000
+  max_executions: 24
+  max_visible_executions: 2
+  max_hidden_executions: 22
+  max_wall_time_ms: 180000
+total:
+  max_wall_time_ms: 420000
+ineligibility_policy: fail_closed

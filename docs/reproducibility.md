@@ -1,7 +1,15 @@
 # Reproducibility
 
-Every real run records the experiment ID, run ID, Git SHA, configuration hash, benchmark hash, task ID, candidate-generator model and seed, generation configuration hash, embedding model/version, representation configuration hash, graph configuration hash, budget, token counts, latency, graph statistics, candidate-set hash, and evaluator result.
+Every real EXP-001 invocation receives a unique run ID. Raw result artifacts use exclusive creation and therefore cannot overwrite an earlier run.
 
-All stochastic components require explicit seeds. Candidate outputs are hashed before aggregation. Every aggregation condition records the same `candidate_set_hash`; the software provides an assertion that raises on candidate-set mismatch.
+The benchmark manifest is hash-locked and its 12 tasks are materialized from the frozen Project-3 HumanEval-derived benchmark family. Each task contains a stable task hash plus independent visible and hidden test hashes. The materialized benchmark file has its own SHA-256.
 
-The benchmark manifest is intentionally **UNFROZEN** in the current state. The real execution path therefore fails closed rather than using mutable task material.
+Candidate generation records model ID/revision, seed, generation configuration hash, token counts, retry policy, and output hashes. The candidate-set manifest is hashed before aggregation.
+
+Representation is generated exactly once for each task/seed candidate set and reused by all similarity/graph conditions. The representation configuration and representation artifact are hashed.
+
+Every result records Git SHA, benchmark hash, model metadata, representation metadata, graph configuration hash, budget counters, timing, candidate-set hash, selection metadata, visible evaluation metadata, and hidden evaluation metadata.
+
+The runtime configuration is digest-pinned and records platform and sandbox restrictions. Preflight verifies the benchmark, materialization, frozen configs, credential availability, and Docker daemon before a real run starts.
+
+Mock execution is validation-only. Smoke execution is labeled EXECUTION_SMOKE_TEST and stored separately; it is not EXP-001 evidence.

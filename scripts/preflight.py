@@ -4,55 +4,64 @@ from __future__ import annotations
 import argparse
 import os
 import shutil
-from pathlib import Path
+import subprocess
 import sys
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
-from benchmarks.loaders.manifest import load_manifest
-from graph_reasoning_research.experiments.config import load_yaml, validate_config
+from graph_reasoning_research.experiments.config import load_yaml, validate_bundle
+
+
+def docker_ready() -> tuple[bool, str]:
+    docker = shutil.which("docker")
+    if not docker:
+        return False, "Docker CLI is unavailable"
+    try:
+        proc = subprocess.run(
+            [docker, "info", "--format", "{{.ServerVersion}}"],
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+    except subprocess.TimeoutExpired:
+        return False, "Docker daemon check timed out"
+    if proc.returncode != 0:
+        return False, f"Docker daemon is unreachable: {proc.stderr.strip()[:300]}"
+    return True, f"Docker server {proc.stdout.strip()}"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/experiments/EXP-001.yaml")
+    parser.add_argument("--skip-credentials", action="store_true")
     args = parser.parse_args()
-    config = load_yaml(ROOT / args.config)
-    blockers = validate_config(config)
-    models = load_yaml(ROOT / config["candidate_generator_config"])
-    representation = load_yaml(ROOT / config["representation_config"])
-    graph = load_yaml(ROOT / config["graph_config"])
-    runtime = load_yaml(ROOT / config["runtime_config"])
-    pricing = load_yaml(ROOT / config["pricing_config"])
 
-    try:
-        manifest = load_manifest(ROOT / config["benchmark_manifest"], require_frozen=True)
-    except Exception as exc:
-        blockers.append(f"benchmark freeze: {exc}")
-    if models.get("status") != "FROZEN":
-        blockers.append("candidate generation model configuration is not FROZEN")
-    if representation.get("status") != "FROZEN":
-        blockers.append("embedding/representation configuration is not FROZEN")
-    if graph.get("status") != "FROZEN":
-        blockers.append("graph configuration is not FROZEN")
-    if pricing.get("status") not in {"FROZEN", "UNAVAILABLE"}:
-        blockers.append("pricing configuration must be FROZEN or explicitly UNAVAILABLE")
-    if runtime.get("status") != "FROZEN" or not str(runtime.get("docker_image", "")).startswith("sha256:"):
-        blockers.append("Docker image digest is not FROZEN")
-    credential_env = models.get("candidate_generator", {}).get("credential_env")
-    if not credential_env or not os.environ.get(credential_env):
+    config = load_yaml(ROOT / args.config)
+    blockers = validate_bundle(ROOT, config)
+
+    model_cfg = load_yaml(ROOT / config["candidate_generator_config"])
+    if model_cfg.get("candidate_generator", {}).get("provider") == "mock":
+        blockers.append("real execution rejects mock candidate adapters")
+
+    credential_env = model_cfg.get("candidate_generator", {}).get("credential_env")
+    if not args.skip_credentials and (not credential_env or not os.environ.get(credential_env)):
         blockers.append("model credentials are unavailable")
-    if not shutil.which("docker"):
-        blockers.append("Docker CLI/daemon is unavailable")
+
+    ready, docker_message = docker_ready()
+    if not ready:
+        blockers.append(docker_message)
 
     if blockers:
         print("NOT READY")
-        for blocker in blockers:
+        for blocker in sorted(set(blockers)):
             print(f"- {blocker}")
         return 1
-    print("READY FOR EXECUTION")
+
+    print("READY FOR REAL EXECUTION")
+    print(docker_message)
     return 0
 
 
