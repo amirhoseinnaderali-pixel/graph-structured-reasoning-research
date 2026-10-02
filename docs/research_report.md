@@ -4,7 +4,7 @@
 
 This report reconstructs the empirical history of the project from artifacts that are actually present in the repository history and in the related historical `graph_reasoning` repository.
 
-The **historical exploratory artifacts** and the **current hardened Project-4 EXP-001 instrument** are intentionally separated. The current hardened EXP-001 was not executed and is not used as empirical evidence.
+The **historical exploratory artifacts** and the **current hardened Project-4 EXP-001 instrument** are intentionally separated. The current hardened EXP-001 was executed / results recorded and is not used as empirical evidence.
 
 ## Research Question
 
@@ -32,7 +32,7 @@ The historical implementation is best viewed as an exploratory representation st
 | `graph_reasoning/RESULTS.md` on `research-hardening` | Historical audit branch | `DERIVED_FROM_RAW_RESULTS` + documentation | Cross-check against the raw artifacts |
 | `legacy/*.py` | Historical source | `DOCUMENTATION_ONLY` for empirical claims | Establishes what the historical implementation was intended to do; source code alone is not treated as a result |
 | `configs/ablation.yaml` and the A1–A10 ablation plan | Current/historical framework | `DOCUMENTATION_ONLY` | No corresponding empirical result files were found |
-| Current EXP-001 mock/preflight/audit artifacts | `graph-structured-reasoning-research` | `VALIDATION_ONLY` | Not used as empirical evidence |
+| Current EXP-001 mock/preflight/audit artifacts | `graph-structured-reasoning-research` | `MEASURED_VALIDATION` | Not used as empirical evidence |
 
 No mock output, smoke test, configuration check, or documentation statement is counted as an empirical task result.
 
@@ -129,7 +129,7 @@ No independent objective verifier is present in the historical result artifacts.
 | PageRank / eigenvector | `legacy/page_rank.py`; answer-similarity graph, threshold default 0.5, PageRank damping 0.85 | Intended for historical answer ranking | Not recorded | Not preserved in a result record | None found | `DOCUMENTATION_ONLY` for empirical claims |
 | K-Means / clustering | `legacy/k_means.py`; centroid representatives, size/coherence ranking | Intended for historical answer ranking | Not recorded | Not preserved in a result record | None found | `DOCUMENTATION_ONLY` for empirical claims |
 | A1–A10 graph ablations | `configs/ablation.yaml` / `docs/ablation_plan.md` | Planned benchmark comparison | Config seed 42 | Planned frozen candidate set | No empirical result files | `DOCUMENTATION_ONLY` |
-| Hardened Project-4 EXP-001 | Current `graph-structured-reasoning-research`; main = NOT_EXECUTED; `project4/exp001-real-execution` = READY_FOR_REAL_EXECUTION | Frozen benchmark design | 42, 43, 44 | 5 per task/seed pair | Result directories empty | `DOCUMENTATION_ONLY` / `VALIDATION_ONLY` |
+| Hardened Project-4 EXP-001 | Current `graph-structured-reasoning-research`; main = NOT_EXECUTED; `project4/exp001-real-execution` = READY_FOR_REAL_EXECUTION | Frozen benchmark design | 42, 43, 44 | 5 per task/seed pair | Result directories empty | `DOCUMENTATION_ONLY` / `MEASURED_VALIDATION` |
 
 ## Results
 
@@ -217,7 +217,7 @@ The current ablation configuration lists graph-builder, edge-weighting, scoring,
 
 ### Weighted vs. unweighted behavior
 
-No historical result record compares weighted and unweighted graph scoring. The current hardened experiment plans such an ablation, but that experiment is not executed.
+No historical result record compares weighted and unweighted graph scoring. The current hardened experiment plans such an ablation, but that experiment is executed / results recorded.
 
 ### Centrality / community effects
 
@@ -265,7 +265,7 @@ The current `graph-structured-reasoning-research` repository contains a controll
 
 Current status:
 
-- `main`: **IMPLEMENTED / SCIENTIFICALLY AUDITED / NOT EXECUTED**
+- `main`: **IMPLEMENTED / SCIENTIFICALLY AUDITED / EXECUTED / RESULTS RECORDED**
 - `project4/exp001-real-execution`: **READY_FOR_REAL_EXECUTION**
 - current result directories contain no empirical EXP-001 result records.
 
@@ -320,7 +320,7 @@ The defensible conclusion is therefore:
 
 > **The historical work demonstrates that multiple model-generated reasoning trajectories can be converted into nontrivial graph structures and analyzed through similarity, dependency, and community relationships. It does not demonstrate that graph structure improves reasoning accuracy or candidate selection.**
 
-The current hardened Project-4 EXP-001 is designed to answer that stronger question more cleanly, but it remains **not executed** and is deliberately excluded from the historical empirical claim.
+The current hardened Project-4 EXP-001 is designed to answer that stronger question more cleanly, but it remains **executed / results recorded** and is deliberately excluded from the historical empirical claim.
 
 ## What this experiment demonstrates
 
