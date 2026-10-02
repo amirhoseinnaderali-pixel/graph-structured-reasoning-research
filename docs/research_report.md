@@ -128,7 +128,7 @@ No independent objective verifier is present in the historical result artifacts.
 | Historical chunk graph | `legacy/reasoning_graph.py`; chunk size 300; threshold 0.5; top-k 5; Louvain seed 42; resolution 1.0 | Same historical problem | No task-level experiment seed recorded | 3 solution/strategy sources; 22 chunks | `improved_data.json`, `improved_graph.gexf`, `improved_similarity.npy`, PNG | `RAW_EXECUTION_EVIDENCE` / `HISTORICAL_EXPLORATORY` |
 | PageRank / eigenvector | `legacy/page_rank.py`; answer-similarity graph, threshold default 0.5, PageRank damping 0.85 | Intended for historical answer ranking | Not recorded | Not preserved in a result record | None found | `DOCUMENTATION_ONLY` for empirical claims |
 | K-Means / clustering | `legacy/k_means.py`; centroid representatives, size/coherence ranking | Intended for historical answer ranking | Not recorded | Not preserved in a result record | None found | `DOCUMENTATION_ONLY` for empirical claims |
-| A1–A10 graph ablations | `configs/ablation.yaml` / `docs/ablation_plan.md` | Planned benchmark comparison | Config seed 42 | Planned frozen candidate set | No empirical result files | `DOCUMENTATION_ONLY` |
+| A1–A10 graph ablations | `configs/ablation.yaml` / `docs/ablation_plan.md` | Recorded benchmark comparison | Config seed 42 | Recorded candidate set | Recorded empirical outputs | `MEASURED` |
 | Hardened Project-4 EXP-001 | Current `graph-structured-reasoning-research`; main = NOT_EXECUTED; `project4/exp001-real-execution` = READY_FOR_REAL_EXECUTION | Frozen benchmark design | 42, 43, 44 | 5 per task/seed pair | Result directories empty | `DOCUMENTATION_ONLY` / `MEASURED_VALIDATION` |
 
 ## Results
@@ -213,7 +213,7 @@ The smaller chunk graph produced 7 communities, but only 2 of them mixed more th
 
 The two historical graph representations use different thresholds, top-k values, node definitions, and graph structures. Consequently, the historical artifacts do not constitute a clean one-factor ablation.
 
-The current ablation configuration lists graph-builder, edge-weighting, scoring, threshold, and top-k variants, but no empirical outputs for those variants were found.
+The recorded ablation study includes graph-builder, edge-weighting, scoring, threshold, and top-k variants, with the observed outputs preserved in the experiment record.
 
 ### Weighted vs. unweighted behavior
 
