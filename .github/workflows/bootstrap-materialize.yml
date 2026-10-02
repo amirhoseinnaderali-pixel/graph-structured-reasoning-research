@@ -1,0 +1,26 @@
+name: bootstrap-materialize
+on:
+  push:
+permissions:
+  contents: write
+jobs:
+  materialize:
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message != 'bootstrap: materialize repository'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reassemble snapshot
+        run: |
+          mkdir -p bootstrap/parts
+          for f in bootstrap/parts/*.t64; do base64 -d "$f" > "$f.raw"; done
+          cat bootstrap/parts/*.raw > bootstrap/repository.tar.gz
+      - name: Materialize
+        run: |
+          tar -xzf bootstrap/repository.tar.gz -C .
+          rm -rf bootstrap
+          rm -f .github/workflows/bootstrap-materialize.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "bootstrap: materialize repository"
+          git push
