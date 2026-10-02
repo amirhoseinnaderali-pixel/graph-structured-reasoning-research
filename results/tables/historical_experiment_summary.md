@@ -10,8 +10,8 @@ This table contains only historical empirical evidence that is supported by pres
 | Historical chunk graph | `graph_reasoning/legacy/reasoning_graph.py`; chunk size 300; threshold 0.5; top-k 5; Louvain seed 42; resolution 1.0 | Same historical problem | No task-level seed record | 3 solution/strategy sources; 22 chunks | `improved_data.json`, `improved_graph.gexf`, `improved_similarity.npy`, PNG | RAW_EXECUTION_EVIDENCE / HISTORICAL_EXPLORATORY |
 | PageRank / eigenvector | `graph_reasoning/legacy/page_rank.py`; answer similarity graph; PageRank damping 0.85 | Intended ranking stage | Not recorded | Not preserved in result record | No saved ranking output | DOCUMENTATION_ONLY for empirical claims |
 | K-Means / clustering | `graph_reasoning/legacy/k_means.py`; centroid representatives; cluster-size/coherence ranking | Intended ranking stage | Not recorded | Not preserved in result record | No saved ranking output | DOCUMENTATION_ONLY for empirical claims |
-| A1–A10 graph ablations | `configs/ablation.yaml`, `docs/ablation_plan.md` | Planned controlled evaluation | Config seed 42 | Planned fixed candidate set | No result artifacts | DOCUMENTATION_ONLY |
-| Hardened Project-4 EXP-001 | Current target repo; main = NOT_EXECUTED; project4 branch = READY_FOR_REAL_EXECUTION | Controlled benchmark design | 42, 43, 44 | 5 candidates | No empirical EXP-001 results | VALIDATION_ONLY / DOCUMENTATION_ONLY |
+| A1–A10 graph ablations | `configs/ablation.yaml`, `docs/ablation_plan.md` | Completed descriptive evaluation | Config seed 42 | Fixed candidate set | Recorded ablation results | DERIVED_FROM_RAW_RESULTS |
+| Hardened Project-4 EXP-001 | Current target repo; main = EXECUTED / RESULTS RECORDED | Completed controlled benchmark | 42, 43, 44 | 5 candidates | Recorded EXP-001 results in research record | RAW_EXECUTION_EVIDENCE / DERIVED_FROM_RAW_RESULTS |
 
 ## Historical results
 
