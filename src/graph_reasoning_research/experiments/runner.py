@@ -130,8 +130,9 @@ def _selection_record(
         similarity_config={"function": "cosine", "normalized_embeddings": True},
         graph_stats=graph_stats,
         benchmark_hash=manifest_sha,
-        status="SUCCESS" if objective_result in {"PASS", "FAIL", "TIMEOUT"} else "INFRASTRUCTURE_ERROR",
+        status=("SUCCESS" if objective_result == "PASS" else "CANDIDATE_FAILURE" if objective_result in {"FAIL", "TIMEOUT"} else "INFRASTRUCTURE_ERROR"),
         error=None if objective_result in {"PASS", "FAIL", "TIMEOUT"} else hidden_eval.get("error"),
+        failure_class=hidden_eval.get("failure_class"),
         generation=generation,
         representation={
             "method": representation.method,
