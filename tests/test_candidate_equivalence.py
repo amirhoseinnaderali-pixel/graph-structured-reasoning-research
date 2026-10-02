@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 
 from graph_reasoning_research.generation.base import MockCandidateGenerator, assert_same_candidate_set
