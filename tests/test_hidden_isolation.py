@@ -1,5 +1,7 @@
 import copy
 
+import numpy as np
+
 from graph_reasoning_research.generation.base import MockCandidateGenerator
 from graph_reasoning_research.graph.builders import threshold_graph
 from graph_reasoning_research.graph.scoring import weighted_degree

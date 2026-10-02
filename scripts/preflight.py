@@ -28,7 +28,7 @@ def main() -> int:
     pricing = load_yaml(ROOT / config["pricing_config"])
 
     try:
-        load_manifest(ROOT / config["benchmark_manifest"], require_frozen=True)
+        manifest = load_manifest(ROOT / config["benchmark_manifest"], require_frozen=True)
     except Exception as exc:
         blockers.append(f"benchmark freeze: {exc}")
     if models.get("status") != "FROZEN":

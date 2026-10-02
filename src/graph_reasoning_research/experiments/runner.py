@@ -77,10 +77,8 @@ def run_mock(config: dict, output_path: str | Path) -> list[dict]:
                 graph_knn_selection,
                 objective_verification(candidate_set, objective_by_id),
             ]
-            shortlist = sorted(
-                graph_threshold_selection.scores,
-                key=lambda c: (-graph_threshold_selection.scores[c], c),
-            )[:2]
+            # C5: graph-prioritize a deterministic shortlist, then run the independent verifier.
+            shortlist = sorted(graph_threshold_selection.scores, key=lambda c: (-graph_threshold_selection.scores[c], c))[:2]
             shortlist_scores = {candidate_id: objective_by_id[candidate_id] for candidate_id in shortlist}
             shortlist_set = candidate_set.__class__(
                 candidate_set.task_id,
@@ -106,8 +104,7 @@ def run_mock(config: dict, output_path: str | Path) -> list[dict]:
             graph_stats = {
                 "nodes": len(threshold.nodes),
                 "edges": len(threshold.edges),
-                "density": (2 * len(threshold.edges))
-                / (len(threshold.nodes) * (len(threshold.nodes) - 1))
+                "density": (2 * len(threshold.edges)) / (len(threshold.nodes) * (len(threshold.nodes) - 1))
                 if len(threshold.nodes) > 1
                 else 0.0,
             }
@@ -116,11 +113,7 @@ def run_mock(config: dict, output_path: str | Path) -> list[dict]:
                 ledger.reserve_verification()
                 visible_start = time.perf_counter()
                 visible = verifier.evaluate_visible(
-                    next(
-                        c
-                        for c in candidate_set.candidates
-                        if c.candidate_id == selection.selected_candidate_id
-                    )
+                    next(c for c in candidate_set.candidates if c.candidate_id == selection.selected_candidate_id)
                 )
                 visible_latency_ms = (time.perf_counter() - visible_start) * 1000
                 row = RunRecord(
@@ -131,16 +124,8 @@ def run_mock(config: dict, output_path: str | Path) -> list[dict]:
                     aggregation_method=selection.method,
                     representation_method=representation.method,
                     representation_config_hash=representation.config_hash,
-                    graph_method=selection.method.split(":", 1)[1]
-                    if selection.method.startswith("graph:")
-                    else None,
-                    graph_config_hash=(
-                        threshold.config_hash
-                        if selection.method == graph_threshold_selection.method
-                        else knn.config_hash
-                        if selection.method == graph_knn_selection.method
-                        else None
-                    ),
+                    graph_method=selection.method.split(":", 1)[1] if selection.method.startswith("graph:") else None,
+                    graph_config_hash=(threshold.config_hash if selection.method == graph_threshold_selection.method else knn.config_hash if selection.method == graph_knn_selection.method else None),
                     candidate_id=selection.selected_candidate_id,
                     selected_candidate_id=selection.selected_candidate_id,
                     objective_result=visible.objective_result,

@@ -60,7 +60,11 @@ class GraphBuilder:
         else:
             raise ValueError(f"unknown graph builder: {self.name}")
         materialized = tuple(
-            (node_ids[i], node_ids[j], float(similarity[i, j]) if self.weighted else 1.0)
+            (
+                node_ids[i],
+                node_ids[j],
+                float(similarity[i, j]) if self.weighted else 1.0,
+            )
             for i, j in sorted(edges)
         )
         cfg_hash = graph_config_hash(config)

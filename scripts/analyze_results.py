@@ -10,6 +10,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from graph_reasoning_research.evaluation.agreement import agreement
 from graph_reasoning_research.evaluation.metrics import accuracy, bootstrap_ci, paired_difference_ci
 
 
@@ -53,12 +54,7 @@ def main() -> None:
                 if method in row and "similarity_ranking" in row
             ]
             if pairs:
-                paired[method] = {
-                    "difference_bootstrap_ci": paired_difference_ci(
-                        [x for x, _ in pairs],
-                        [y for _, y in pairs],
-                    )
-                }
+                paired[method] = {"difference_bootstrap_ci": paired_difference_ci([x for x, _ in pairs], [y for _, y in pairs])}
 
     summary["paired_vs_similarity"] = paired
     Path(args.output).write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")

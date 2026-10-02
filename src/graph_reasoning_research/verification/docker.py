@@ -52,7 +52,9 @@ class DockerPythonVerifier:
             (root / "tests.json").write_text(json.dumps(tests), encoding="utf-8")
             (root / "runner.py").write_text(RUNNER_SCRIPT, encoding="utf-8")
             command = [
-                docker, "run", "--rm",
+                docker,
+                "run",
+                "--rm",
                 "--network=none",
                 "--cap-drop=ALL",
                 "--security-opt=no-new-privileges",
@@ -62,12 +64,21 @@ class DockerPythonVerifier:
                 f"--memory={self.memory}",
                 f"--cpus={self.cpus}",
                 "--tmpfs=/tmp:rw,noexec,nosuid,size=64m",
-                "-v", f"{root}:/work:ro",
+                "-v",
+                f"{root}:/work:ro",
                 self.image_digest,
-                "python", "/work/runner.py", "/work/candidate.py", "/work/tests.json",
+                "python",
+                "/work/runner.py",
+                "/work/candidate.py",
+                "/work/tests.json",
             ]
             try:
-                proc = subprocess.run(command, capture_output=True, text=True, timeout=self.timeout_seconds)
+                proc = subprocess.run(
+                    command,
+                    capture_output=True,
+                    text=True,
+                    timeout=self.timeout_seconds,
+                )
             except subprocess.TimeoutExpired:
                 return CandidateEvaluation(candidate.candidate_id, "TIMEOUT", failure_class="timeout")
             if proc.returncode == 0:
