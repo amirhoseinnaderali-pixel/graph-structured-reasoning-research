@@ -112,4 +112,13 @@ class RunRecord:
     similarity_config: dict[str, Any]
     graph_stats: dict[str, Any]
     failure_class: str | None = None
-    metadata: dict[str, Any] = field(default_factory=dict)
+    benchmark_hash: str = "UNSET"
+    status: str = "SUCCESS"
+    error: str | None = None
+    generation: dict[str, Any] = field(default_factory=dict)
+    representation: dict[str, Any] = field(default_factory=dict)
+    aggregation: dict[str, Any] = field(default_factory=dict)
+    visible_evaluation: dict[str, Any] = field(default_factory=dict)
+    hidden_evaluation: dict[str, Any] = field(default_factory=dict)
+    budget: dict[str, Any] = field(default_factory=dict)
+    environment: dict[str, Any] = field(default_factory=dict)
