@@ -1,66 +1,39 @@
 # Graph-Structured Reasoning Research
 
-Controlled research infrastructure for **Project 4** in a broader reasoning research program.
+Project 4 is a controlled research instrument for one question:
 
-## Scientific question
+> **Does explicitly modeling relationships between multiple reasoning trajectories as a graph improve final candidate selection compared with simpler aggregation methods, under the same candidate set?**
 
-> **Does explicitly modeling relationships between multiple reasoning trajectories as a graph improve final candidate selection compared with simpler aggregation methods?**
-
-The repository is deliberately neutral. It does not assume that graph aggregation helps. Results may show an improvement, no measurable benefit, benefits only for some candidate diversity or compute regimes, or insufficient value relative to its extra cost.
-
-## EXP-001 — Controlled Graph Aggregation Benchmark
-
-The primary experiment holds the candidate set fixed and varies only the aggregation/selection mechanism:
-
-- **C0** — Single candidate
-- **C1** — Independent candidates (candidate-set construction; selection is deterministic first/random analyses)
-- **C2** — Majority / consensus
-- **C3** — Similarity ranking
-- **C4** — Graph aggregation
-- **C5** — Graph + independent objective verification
-- **C6** — Graph-construction/scoring ablations
-
-The central scientific comparison is:
+## Scientific design
 
 ```text
-same candidate set + same representation inputs
-                 |
-       +---------+---------+
-       |                   |
- similarity ranking    graph ranking
-       |                   |
-       +---------+---------+
-                 |
-       objective correctness
+same candidate set
+      ↓
+explicit representation + similarity
+      ↓
+different aggregation mechanism
+      ↓
+objective correctness + aggregation compute
 ```
 
-## Status
+EXP-001 implements C0 first candidate, C1 seeded random, C2 consensus, C3 similarity ranking, C4 graph aggregation, C5 graph + independent objective verification, and C6 graph ablations. Candidate-set hashing is an enforced invariant. Graph and similarity conditions share the same representation artifact in direct comparisons.
 
-**IMPLEMENTED / SCIENTIFICALLY AUDITED / NOT EXECUTED.**
+## Current status
 
-The mock end-to-end pipeline is executable locally and is explicitly marked `validation_only`. Real EXP-001 is fail-closed until the benchmark, model configuration, embedding model, execution environment, and credentials are frozen and the readiness audit passes.
+**IMPLEMENTED / SCIENTIFICALLY AUDITED / NOT EXECUTED**
 
-No empirical graph advantage, statistical significance, or benchmark performance is claimed by this repository.
+The repository is blocked from real execution because the benchmark is not frozen, exact generation/embedding models are not frozen, the Docker image digest is not frozen, model credentials are unavailable, and Docker availability has not been verified. Monetary pricing is explicitly marked unavailable rather than fabricated.
 
-## Quick validation
+The mock pipeline is validation-only. Mock outputs are never scientific evidence.
+
+## Validation
 
 ```bash
 python -m pytest -q
-make mock
-make audit
+python scripts/validate_config.py
+python scripts/preflight.py
+python scripts/scientific_audit.py
+python scripts/run_experiment.py --mode mock
 ```
 
-`make audit` is expected to fail closed for a fresh checkout because the real benchmark and runtime inputs are intentionally not frozen.
-
-## Real execution gate
-
-The real runner refuses to execute while any of the following remains unresolved:
-
-- frozen benchmark manifest with task/test hashes;
-- frozen candidate-generator/model configuration;
-- frozen embedding configuration;
-- Docker runtime and pinned execution image digest;
-- credentials for any external inference provider;
-- scientific invariant audit.
-
-See `docs/methodology.md`, `docs/reproducibility.md`, and `docs/experiment_registry.md`.
+The full EXP-001 is intentionally **NOT EXECUTED** in the current project state.

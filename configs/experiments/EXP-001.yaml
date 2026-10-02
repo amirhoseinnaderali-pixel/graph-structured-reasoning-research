@@ -6,8 +6,11 @@ mode_policy:
   mock_allowed: true
 benchmark_manifest: benchmarks/manifests/EXP-001-v1.json
 candidate_generator_config: configs/models/EXP-001.yaml
+representation_config: configs/representations/EXP-001.yaml
 budget_config: configs/budgets/EXP-001.yaml
 graph_config: configs/graph/EXP-001.yaml
+runtime_config: configs/runtime/EXP-001.yaml
+pricing_config: configs/pricing/EXP-001.yaml
 seeds: [42, 43, 44]
 candidate_count: 5
 primary_baselines:
@@ -23,3 +26,8 @@ ablations:
   graph_builders: [threshold, knn]
   edge_modes: [weighted, unweighted]
   scoring_methods: [weighted_degree, degree_centrality, pagerank, local_neighborhood_agreement]
+scientific_controls:
+  candidate_set_hashing: true
+  hidden_test_isolation: true
+  representation_hashing: true
+  graph_config_hashing: true

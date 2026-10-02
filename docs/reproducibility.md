@@ -1,7 +1,7 @@
 # Reproducibility
 
-Every real run should record experiment ID, run ID, Git SHA, configuration hash, benchmark hash, task ID, candidate-generator configuration, embedding model/version, graph configuration, seed, budgets, token usage, latency, graph statistics, and evaluator result.
+Every real run records the experiment ID, run ID, Git SHA, configuration hash, benchmark hash, task ID, candidate-generator model and seed, generation configuration hash, embedding model/version, representation configuration hash, graph configuration hash, budget, token counts, latency, graph statistics, candidate-set hash, and evaluator result.
 
-All stochastic components require explicit seeds. Result records are append-only JSONL with a schema version. Configuration and benchmark hashes are designed to make accidental drift visible.
+All stochastic components require explicit seeds. Candidate outputs are hashed before aggregation. Every aggregation condition records the same `candidate_set_hash`; the software provides an assertion that raises on candidate-set mismatch.
 
-The initial benchmark manifest is intentionally **UNFROZEN**. This makes real EXP-001 fail closed rather than silently run on mutable task material.
+The benchmark manifest is intentionally **UNFROZEN** in the current state. The real execution path therefore fails closed rather than using mutable task material.

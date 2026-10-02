@@ -1,9 +1,7 @@
 # Evaluation
 
-Programming tasks use objective execution. Visible evaluation may be used only when explicitly permitted by the experiment's selection policy. Hidden tests are reserved for final evaluation.
+For programming tasks, only visible tests may be used for candidate selection when the experiment permits objective verification. Hidden tests are evaluation-only. They cannot enter candidate representations, embeddings, similarities, graph construction, graph scoring, ranking, or selection.
 
-Infrastructure failures remain distinct from wrong answers. A timeout, missing Docker runtime, malformed test material, or missing credential must never be recoded as `FAIL`.
+The verifier interface separates `evaluate_visible()` and `evaluate_hidden()`. Infrastructure failures are distinct from wrong answers, malformed output, and timeouts.
 
-Primary outcome: objective correctness at the selected candidate level.
-
-Secondary outcomes: candidate-set agreement, ranking agreement, representation/graph statistics, latency, token usage, and verification cost.
+Primary outcome: objective correctness of the selected candidate. Secondary outcomes include candidate-selection agreement, graph-vs-similarity disagreement, graph density, aggregation latency, verification latency, generation/representation cost, and failure categories.

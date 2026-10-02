@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import shutil
 import subprocess
@@ -12,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
-from benchmarks.loaders.manifest import load_manifest
+from benchmarks.loaders.manifest import load_manifest, manifest_hash
 from graph_reasoning_research.experiments.config import load_yaml, validate_config
 from graph_reasoning_research.logging.schema import REQUIRED_FIELDS
 
@@ -25,72 +26,104 @@ def git_sha() -> str | None:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--config", default="configs/experiments/EXP-001.yaml")
-    args = ap.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", default="configs/experiments/EXP-001.yaml")
+    args = parser.parse_args()
     failures: list[str] = []
 
-    cfg = load_yaml(ROOT / args.config)
-    failures.extend(validate_config(cfg))
-    baseline_names = set(cfg.get("primary_baselines", []))
-    if "similarity_ranking" not in baseline_names:
-        failures.append("baseline fairness: similarity_ranking baseline is missing")
-    if "first_candidate" not in baseline_names:
-        failures.append("baseline fairness: first_candidate baseline is missing")
-    if cfg.get("candidate_count", 0) < 2:
+    config = load_yaml(ROOT / args.config)
+    failures.extend(validate_config(config))
+    baseline_names = set(config.get("primary_baselines", []))
+    for required_baseline in ("first_candidate", "random_candidate", "consensus", "similarity_ranking", "objective_verification"):
+        if required_baseline not in baseline_names:
+            failures.append(f"baseline fairness: missing {required_baseline}")
+
+    if config.get("candidate_count", 0) < 2:
         failures.append("candidate equivalence: candidate_count must be >= 2")
-    models = load_yaml(ROOT / cfg["candidate_generator_config"])
-    if models.get("embedding", {}).get("normalize_embeddings") is not True:
-        failures.append("representation consistency: embedding normalization policy is not explicit")
-    if not models.get("embedding", {}).get("model_id"):
-        failures.append("representation consistency: embedding model ID is missing")
-    graph_cfg = load_yaml(ROOT / cfg["graph_config"])
-    if graph_cfg.get("status") not in {"FROZEN", "FROZEN_FOR_SOFTWARE_VALIDATION"}:
-        failures.append("graph transparency: graph config status is not frozen/validation-frozen")
+    controls = config.get("scientific_controls", {})
+    for control in ("candidate_set_hashing", "hidden_test_isolation", "representation_hashing", "graph_config_hashing"):
+        if controls.get(control) is not True:
+            failures.append(f"scientific controls: {control} is not enabled")
+
+    models = load_yaml(ROOT / config["candidate_generator_config"])
+    representation = load_yaml(ROOT / config["representation_config"])
+    graph = load_yaml(ROOT / config["graph_config"])
+    runtime = load_yaml(ROOT / config["runtime_config"])
+    pricing = load_yaml(ROOT / config["pricing_config"])
+
+    if models.get("status") != "FROZEN":
+        failures.append("candidate-generator/model config is not FROZEN")
+    for key in ("model_id", "model_revision", "credential_env"):
+        if not models.get("candidate_generator", {}).get(key):
+            failures.append(f"candidate-generator/model config: missing {key}")
+
+    if representation.get("status") != "FROZEN":
+        failures.append("representation config is not FROZEN")
+    for key in ("method", "model_id", "model_revision", "dimension", "normalize_embeddings", "similarity_function"):
+        if key not in representation:
+            failures.append(f"representation config: missing {key}")
+
+    if graph.get("status") != "FROZEN":
+        failures.append("graph config is not FROZEN")
     for section in ("threshold", "knn", "weighted", "unweighted", "scoring"):
-        if section not in graph_cfg:
-            failures.append(f"graph transparency: missing explicit config section '{section}'")
-    if not graph_cfg.get("scoring", {}).get("methods"):
-        failures.append("graph transparency: no graph scoring methods are configured")
-    if sorted(cfg.get("seeds", [])) != cfg.get("seeds", []):
-        failures.append("reproducibility: seeds must be in deterministic order")
-    if not cfg.get("seeds"):
-        failures.append("reproducibility: explicit seeds are missing")
-    if not REQUIRED_FIELDS.issubset({
-        "experiment_id", "run_id", "task_id", "seed", "aggregation_method",
-        "representation_method", "candidate_id", "selected_candidate_id", "objective_result",
-        "generation_tokens", "representation_tokens", "embedding_latency_ms", "similarity_latency_ms",
-        "representation_latency_ms", "graph_construction_latency_ms", "graph_scoring_latency_ms",
-        "aggregation_latency_ms", "verification_latency_ms", "candidate_set_hash", "representation_hash", "graph_stats"
-    }):
-        failures.append("reproducibility: result schema is incomplete")
-    manifest_path = ROOT / cfg["benchmark_manifest"]
+        if section not in graph:
+            failures.append(f"graph transparency: missing section {section}")
+
+    if runtime.get("status") != "FROZEN" or not str(runtime.get("docker_image", "")).startswith("sha256:"):
+        failures.append("runtime: immutable Docker image digest is not frozen")
+
+    if pricing.get("status") not in {"FROZEN", "UNAVAILABLE"}:
+        failures.append("pricing: status must be FROZEN or UNAVAILABLE")
+
+    schema_fields = REQUIRED_FIELDS
+    required_cost_terms = {
+        "generation_input_tokens",
+        "generation_output_tokens",
+        "representation_tokens",
+        "embedding_latency_ms",
+        "similarity_latency_ms",
+        "graph_construction_latency_ms",
+        "graph_scoring_latency_ms",
+        "visible_verification_latency_ms",
+        "hidden_verification_latency_ms",
+    }
+    if not required_cost_terms.issubset(schema_fields):
+        failures.append("cost accounting: result schema is incomplete")
+
+    manifest_path = ROOT / config["benchmark_manifest"]
     try:
         manifest = load_manifest(manifest_path, require_frozen=True)
         if manifest["evaluation_policy"]["hidden_tests_allowed_during_selection"]:
             failures.append("no leakage: hidden tests are allowed during selection")
         if not manifest["evaluation_policy"]["verifier_independent_of_graph"]:
-            failures.append("no leakage: verifier independence is not declared")
+            failures.append("no leakage: verifier is not independent of graph")
+        expected = manifest.get("manifest_hash")
+        if expected and expected != manifest_hash(manifest):
+            failures.append("benchmark hash mismatch")
     except Exception as exc:
         failures.append(f"benchmark gate: {exc}")
-    required_cost_terms = ["generation_tokens", "representation_latency_ms", "graph_construction_latency_ms", "graph_scoring_latency_ms", "aggregation_latency_ms", "verification_latency_ms"]
-    if any(term not in REQUIRED_FIELDS for term in required_cost_terms):
-        failures.append("cost accounting: schema does not expose all cost dimensions")
-    if models.get("status") != "FROZEN":
-        failures.append("candidate-generator/model config is not FROZEN")
-    if models.get("embedding", {}).get("provider") == "UNSET":
-        failures.append("embedding provider is UNSET")
-    credential_env = models.get("candidate_generator", {}).get("credential_env", "UNSET")
-    if credential_env in {None, "", "UNSET"}:
-        failures.append("credentials: credential environment variable is not configured")
-    elif not os.environ.get(credential_env):
-        failures.append(f"credentials: {credential_env} is not present")
+
+    credential_env = models.get("candidate_generator", {}).get("credential_env")
+    if not credential_env or not os.environ.get(credential_env):
+        failures.append("credentials: required model credential is not configured")
+
     if not shutil.which("docker"):
-        failures.append("Docker CLI is not installed")
-    print(f"GIT_SHA={git_sha() or 'UNKNOWN'}")
-    print(f"REAL_EXECUTION_READY={not failures}")
-    print(f"FAILURE_COUNT={len(failures)}")
-    for failure in failures: print(f"NOT_READY: {failure}")
+        failures.append("execution environment: Docker CLI is unavailable")
+
+    report = {
+        "git_sha": git_sha(),
+        "benchmark": "FROZEN" if not any("benchmark" in x for x in failures) else "NOT_READY",
+        "model": models.get("status"),
+        "representation": representation.get("status"),
+        "graph": graph.get("status"),
+        "runtime": runtime.get("status"),
+        "pricing": pricing.get("status"),
+        "failure_count": len(failures),
+        "failures": failures,
+    }
+    print(json.dumps(report, indent=2, sort_keys=True))
     return 0 if not failures else 1
 
-if __name__ == "__main__": raise SystemExit(main())
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,9 @@
+experiment_id: EXP-001
+status: UNFROZEN
+method: sentence_embedding
+provider: UNSET
+model_id: UNSET
+model_revision: UNSET
+dimension: UNSET
+normalize_embeddings: true
+similarity_function: cosine

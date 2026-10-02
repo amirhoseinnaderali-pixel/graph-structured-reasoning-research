@@ -1,35 +1,35 @@
 # Methodology
 
-## Controlled pipeline
+## Central comparison
 
 ```text
 problem
   -> fixed candidate generator
   -> N frozen candidate trajectories
-  -> representation layer
+  -> explicit representation
   -> similarity matrix
   -> aggregation / selection
   -> objective evaluation
 ```
 
-For the primary comparison, the candidate set, candidate order, representation process, seed, and candidate-generation budget are held fixed. Only the aggregation/selection rule changes.
+The same candidate set is consumed by every aggregation condition. Candidate generation is not rerun per condition. Each candidate carries a candidate ID, task ID, generator model ID, seed, generation configuration hash, and output hash; the ordered candidate manifest is hashed into `candidate_set_hash`. A comparison fails if candidate manifests differ.
 
 ## Conditions
 
-- C0: first/single candidate reference.
-- C1: independent candidate set with deterministic random/first analyses.
-- C2: consensus where an answer-level consensus target is semantically appropriate.
-- C3: similarity ranking using aggregate pairwise similarity without a graph object.
-- C4: graph aggregation.
-- C5: graph prioritization followed by an independent objective verifier.
-- C6: graph ablations across builders, edge modes, and scoring functions.
+- C0 — first candidate.
+- C1 — seeded random candidate.
+- C2 — consensus/majority.
+- C3 — similarity ranking without graph construction.
+- C4 — graph aggregation.
+- C5 — graph prioritization followed by independent objective verification.
+- C6 — graph-construction/scoring ablations.
 
-No condition is assumed superior.
+Graph-vs-similarity comparisons use the same representations and the same similarity matrix.
 
-## Representation layer
+## Hidden-test isolation
 
-Text, structured reasoning (where task material supports it), embeddings, and the similarity matrix are first-class artifacts. The embedding backend and revision are explicit configuration rather than hidden implementation constants.
+Hidden evaluation is isolated from all selection-visible computation. Regression tests mutate hidden metadata while holding candidate text and hashes fixed and assert that representation hashes, graph edges, graph scores, and selected candidates remain unchanged.
 
-## Independence
+## Compute
 
-Selection-visible information is separated from hidden evaluation. Hidden tests are evaluation-only and cannot enter embeddings, graph edges, weights, centrality, ranking, or selection.
+Generation calls/tokens, representation calls/tokens/latency, similarity latency, graph construction, graph scoring, aggregation latency, visible verification, and hidden evaluation are separate result fields.

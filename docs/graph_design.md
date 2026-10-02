@@ -1,23 +1,7 @@
 # Graph Design
 
-## Builders
+Graph construction is a first-class, hashed configuration. EXP-001 supports threshold and k-nearest-neighbor graphs, weighted or unweighted edges, and weighted-degree, degree-centrality, PageRank, and local-neighborhood-agreement scoring.
 
-### Threshold
+A threshold graph includes edge `(i,j)` when cosine similarity is at least the configured threshold. A k-NN graph connects each node to its deterministic top-k neighbors and materializes the union as an undirected graph. Weighted edges retain cosine similarity; unweighted edges use unit weight.
 
-Edge `(i,j)` exists when cosine similarity is at least `tau`.
-
-### k-nearest-neighbor
-
-Each candidate connects to its configured `k` nearest peers; the implementation materializes the union of directed neighbor choices as an undirected candidate graph.
-
-## Edge modes
-
-Weighted edges retain the similarity value. Unweighted edges retain topology only.
-
-## Scoring
-
-The framework supports weighted degree, degree centrality, PageRank, and local neighborhood agreement. Scores are ranking signals only; they are not correctness probabilities.
-
-## Complexity accounting
-
-Representation, dense similarity, graph construction, and scoring are measured as aggregation-side costs. Candidate generation and objective verification are accounted for separately.
+Every graph run records graph method, full graph configuration, graph configuration hash, node count, edge count, density, construction latency, and scoring latency. Graph scores are ranking signals rather than correctness probabilities.

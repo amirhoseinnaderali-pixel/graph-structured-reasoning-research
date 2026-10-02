@@ -14,23 +14,24 @@ from graph_reasoning_research.experiments.runner import run_mock
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--config", default="configs/experiments/EXP-001.yaml")
-    ap.add_argument("--mode", choices=["mock", "real"], default="mock")
-    args = ap.parse_args()
-    cfg = load_yaml(ROOT / args.config)
-    failures = validate_config(cfg)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", default="configs/experiments/EXP-001.yaml")
+    parser.add_argument("--mode", choices=["mock", "real"], default="mock")
+    args = parser.parse_args()
+    config = load_yaml(ROOT / args.config)
+    failures = validate_config(config)
     if failures:
         print("CONFIG INVALID")
-        for f in failures: print(f"- {f}")
+        for failure in failures:
+            print(f"- {failure}")
         return 1
     if args.mode == "real":
-        print("REAL EXECUTION BLOCKED: EXP-001 is intentionally not executable in the initial state.")
+        print("REAL EXECUTION BLOCKED: run scripts/preflight.py first; EXP-001 remains NOT EXECUTED.")
         return 2
-    out = ROOT / "results/validation/EXP-001-mock.jsonl"
-    out.unlink(missing_ok=True)
-    rows = run_mock(cfg, out)
-    print(json.dumps({"status": "validation_only", "records": len(rows), "path": str(out)}, indent=2))
+    output = ROOT / "results/validation/EXP-001-mock.jsonl"
+    output.unlink(missing_ok=True)
+    rows = run_mock(config, output)
+    print(json.dumps({"status": "validation_only", "records": len(rows), "path": str(output)}, indent=2))
     return 0
 
 

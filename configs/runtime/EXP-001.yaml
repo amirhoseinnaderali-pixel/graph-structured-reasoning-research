@@ -1,0 +1,14 @@
+experiment_id: EXP-001
+status: UNFROZEN
+docker_image: UNSET
+platform: linux/amd64
+network: none
+read_only_root: true
+no_new_privileges: true
+drop_all_capabilities: true
+ipc: none
+tmpfs_tmp: true
+pids_limit: 64
+memory: 512m
+cpus: 1
+timeout_seconds: 10
