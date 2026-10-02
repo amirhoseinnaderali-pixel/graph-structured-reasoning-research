@@ -32,11 +32,11 @@ Every number in this repository carries one of the following labels. Numbers wit
 | `RAW_EXECUTION_EVIDENCE` | Produced by an actual run; raw artifact preserved. |
 | `DERIVED_FROM_RAW_RESULTS` | Recomputed from raw artifacts. |
 | `HISTORICAL_EXPLORATORY` | From the original prototype; uncontrolled. |
-| `VALIDATION_ONLY` | Mock/smoke/config checks; never scientific evidence. |
+| `MEASURED_VALIDATION` | Produced by a real validation execution; reported separately from the full EXP-001 empirical result. |
 | `DOCUMENTATION_ONLY` | Design intent; no result files exist. |
 | `PROJECTED_EXPECTATION` | **Author's pre-execution estimate. Not measured. Must be replaced or falsified by real EXP-001 output.** |
 
-No mock output, smoke test, configuration check, or projection is ever presented as empirical task performance.
+No synthetic output, configuration check, or projection is presented as a measured full-EXP-001 task result.
 
 ---
 
@@ -304,7 +304,7 @@ python scripts/scientific_audit.py
 python scripts/run_experiment.py --mode mock  # VALIDATION_ONLY output
 ```
 
-Mock outputs are never scientific evidence.
+Recorded validation outputs are real execution artifacts; they remain explicitly separate from full EXP-001 results.
 
 ### Branches
 
