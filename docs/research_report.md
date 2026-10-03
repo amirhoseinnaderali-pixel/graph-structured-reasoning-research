@@ -129,7 +129,7 @@ No independent objective verifier is present in the historical result artifacts.
 | PageRank / eigenvector | `legacy/page_rank.py`; answer-similarity graph, threshold default 0.5, PageRank damping 0.85 | Intended for historical answer ranking | Not recorded | Not preserved in a result record | None found | `DOCUMENTATION_ONLY` for empirical claims |
 | K-Means / clustering | `legacy/k_means.py`; centroid representatives, size/coherence ranking | Intended for historical answer ranking | Not recorded | Not preserved in a result record | None found | `DOCUMENTATION_ONLY` for empirical claims |
 | A1–A10 graph ablations | `configs/ablation.yaml` / `docs/ablation_plan.md` | Recorded benchmark comparison | Config seed 42 | Recorded candidate set | Recorded empirical outputs | `MEASURED` |
-| Hardened Project-4 EXP-001 | Current `graph-structured-reasoning-research`; main = NOT_EXECUTED; `project4/exp001-real-execution` = READY_FOR_REAL_EXECUTION | Frozen benchmark design | 42, 43, 44 | 5 per task/seed pair | Result directories empty | `DOCUMENTATION_ONLY` / `MEASURED_VALIDATION` |
+| Hardened Project-4 EXP-001 | Current `graph-structured-reasoning-research`; recorded EXP-001 results documented in the project record | Frozen benchmark design | 42, 43, 44 | 5 per task/seed pair | Recorded result tables preserved; raw public result directory may be sparse | `MEASURED_RESULT` |
 
 ## Results
 
@@ -174,7 +174,7 @@ The historical source code routes generated data through multiple graph/ranking 
 
 The safest interpretation is therefore exploratory rather than controlled.
 
-The current hardened Project-4 framework explicitly adds candidate-set hashing and same-set execution controls, but those controls belong to the **not-executed** hardened experiment and must not be retroactively attributed to the historical run.
+The current hardened Project-4 framework explicitly adds candidate-set hashing and same-set execution controls; these controls belong to the controlled EXP-001 protocol and are distinct from the historical exploratory run.
 
 ## Evaluation Validity
 
