@@ -4,7 +4,7 @@
 
 ![status](https://img.shields.io/badge/completed%20empirical%20study-recorded-brightgreen)
 
-![exp001](https://img.shields.io/badge/EXP--001-completed%20%7C%20audited%20%7C%20results%20recorded-brightgreen)
+![exp001](https://img.shields.io/badge/EXP--001-completed%20%7C%20internally%20audited%20%7C%20results%20recorded-brightgreen)
 
 ![evidence](https://img.shields.io/badge/task--accuracy%20evidence-recorded-brightgreen)
 
@@ -276,7 +276,7 @@ If EXP-001 uses a thought-level representation comparable to the historical one,
 
 ---
 
-## 9. How to interpret the eventual result
+## 9. How to interpret the recorded result
 
 | Observed | Reasonable reading |
 |---|---|
@@ -310,7 +310,7 @@ Recorded validation outputs are real execution artifacts; they remain explicitly
 
 | Branch | State |
 |---|---|
-| `main` | IMPLEMENTED / SCIENTIFICALLY AUDITED / EXECUTED / RESULTS RECORDED |
+| `main` | IMPLEMENTED / INTERNALLY AUDITED / EXECUTED / RESULTS RECORDED |
 | `project4/exp001-real-execution` | READY_FOR_REAL_EXECUTION (not historical evidence) |
 | `sync-helper` | tooling |
 
