@@ -25,6 +25,10 @@
 
 ## 1. Evidence policy and labels
 
+**Evidence at a glance.** The project contains two deliberately separate bodies of evidence: (1) a historical graph-construction artifact with **17 stored solution instances, 230 nodes, 1,339 edges, and 10 mixed-source communities**, and (2) a completed controlled EXP-001 study with **55.0%, 54.5%, 59.5%, 60.5%, 61.5%, 71.0%** accuracy for C1–C6 and a **77.5% oracle**. The historical structural observation is not used as a performance result.
+
+**Related work / non-novelty boundary.** Graph aggregation is treated here as one candidate-selection mechanism, not as a claim that graphs are a new general reasoning primitive. The controlled question is narrower: when the **same candidate set** is presented to multiple selectors, does graph aggregation change objective selection quality? Results are reported against non-graph and verifier-based controls in Section 6.
+
 Every number in this repository carries one of the following labels. Numbers without a label should be treated as unverified.
 
 | Label | Meaning |
