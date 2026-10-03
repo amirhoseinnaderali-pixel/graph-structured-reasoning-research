@@ -60,7 +60,7 @@ All hypotheses are stated before execution. Contrasts are paired on the same tas
 | **H4** | An independent objective verifier adds value on top of the graph | (graph + verifier) − graph | Holm-adjusted p < 0.05 | Point estimate ≤ 0 |
 | **H5** (exploratory) | Graph gains depend on construction choices | ablation deltas vs. full graph | Reported descriptively with CIs; no confirmatory claim | n/a |
 
-An inconclusive result (CI spans zero and the minimum detectable effect, Section 6.2, exceeds the plausible true effect) is **not** reported as evidence of no effect.
+An inconclusive result (CI spans zero and the minimum detectable effect, Section 6.2, exceeds the plausible true effect) is **not** reported as evidence of no effect. Likewise, historical community mixing is a graph-structure observation, not by itself evidence that graph selection improves correctness; the controlled EXP-001 result table provides the objective selection comparison.
 
 ---
 
