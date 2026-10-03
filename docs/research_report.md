@@ -265,7 +265,7 @@ The current `graph-structured-reasoning-research` repository contains a controll
 
 Current status:
 
-- `main`: **IMPLEMENTED / SCIENTIFICALLY AUDITED / EXECUTED / RESULTS RECORDED**
+- `main`: **IMPLEMENTED / INTERNALLY AUDITED / EXECUTED / RESULTS RECORDED**
 - `project4/exp001-real-execution`: **READY_FOR_REAL_EXECUTION** for independent reruns
 - the research record contains the completed EXP-001 empirical results.
 
