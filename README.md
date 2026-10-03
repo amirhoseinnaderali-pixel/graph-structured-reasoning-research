@@ -150,6 +150,8 @@ hidden-test correctness  +  aggregation compute
 
 Reference upper bound (not a selector): **Oracle** = a task counts as solved if any of the 5 candidates is correct.
 
+**Causal-identification boundary.** The current study includes non-graph selectors (C1–C4), graph-only aggregation (C5), and graph + objective verification (C6). It does **not** include a non-graph execution-only selector. Therefore C6 identifies the joint effect of **graph aggregation + this verifier** relative to the current controls; it does not isolate the verifier effect from the graph effect. This limitation is explicit and is not folded into the graph-only C5 comparison.
+
 ### 5.3 Fixed design parameters (from repository configuration)
 
 | Parameter | Value |
