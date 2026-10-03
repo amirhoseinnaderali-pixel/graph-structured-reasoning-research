@@ -325,7 +325,7 @@ configs/                      experiment and ablation configuration
 docs/                         research report, ablation plan
 experiments/EXP-001/          controlled experiment definition
 paper/                        manuscript sources
-results/                      result tables (empty for EXP-001 until executed)
+results/                      recorded result tables, figures, processed outputs, and validation artifacts
 scripts/                      validation, preflight, audit, runner
 src/graph_reasoning_research/ implementation
 tests/                        test suite
