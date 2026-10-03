@@ -174,7 +174,7 @@ The historical source code routes generated data through multiple graph/ranking 
 
 The safest interpretation is therefore exploratory rather than controlled.
 
-The current hardened Project-4 framework explicitly adds candidate-set hashing and same-set execution controls; these controls belong to the controlled EXP-001 protocol and are distinct from the historical exploratory run.
+The current hardened Project-4 framework adds candidate-set hashing and same-set execution controls; these controls belong to the controlled EXP-001 protocol and are distinct from the historical exploratory run.
 
 ## Evaluation Validity
 
@@ -217,7 +217,7 @@ The recorded ablation study includes graph-builder, edge-weighting, scoring, thr
 
 ### Weighted vs. unweighted behavior
 
-No historical result record compares weighted and unweighted graph scoring. The current hardened experiment plans such an ablation, but that experiment is executed / results recorded.
+The recorded EXP-001 ablation results include weighted/unweighted graph scoring and related graph-construction variants; these are reported separately from the historical exploratory artifacts.s recorded.
 
 ### Centrality / community effects
 
@@ -304,7 +304,7 @@ The historical evidence has several material limitations:
 5. **No controlled seeds.** A graph library seed is present for Louvain/layout operations, but there is no benchmark-level repeated-seed protocol for candidate generation and selection.
 6. **Small exploratory sample.** The largest preserved candidate set contains 17 solution instances from one problem.
 7. **Representation confounding.** The two graph artifacts use different node granularities and different similarity thresholds/top-k settings.
-8. **No controlled graph ablation results.** The A1–A10 ablation definitions exist, but empirical outputs were not found.
+8. **Graph ablation results.** A1–A10 ablations are reported in the recorded EXP-001 result table; the historical exploratory run remains separate.
 9. **No runtime/cost accounting.** Timing and token/cost records are absent.
 10. **Community interpretation is descriptive.** A mixed community indicates shared graph connectivity, not logical equivalence or correctness.
 11. **Historical ranking outputs are incomplete.** PageRank/eigenvector/K-Means implementations exist, but their selected candidates and outcomes are not preserved in a standardized result record.
