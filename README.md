@@ -2,6 +2,8 @@
 
 **Does explicitly modeling relationships between multiple reasoning trajectories as a graph improve final candidate selection, compared with simpler aggregation methods, when every method sees the same candidate set?**
 
+**Portfolio role.** The selector-focused study: the scientific unit is the common candidate set, with graph aggregation tested against alternative selection mechanisms.
+
 ![status](https://img.shields.io/badge/completed%20empirical%20study-recorded-brightgreen)
 
 ![exp001](https://img.shields.io/badge/EXP--001-completed%20%7C%20internally%20audited%20%7C%20results%20recorded-brightgreen)
