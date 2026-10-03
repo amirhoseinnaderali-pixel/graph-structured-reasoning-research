@@ -18,7 +18,7 @@
 |---|---|
 | **What exists and is measured** | A historical, exploratory graph-construction study over multi-model reasoning traces (230-node / 1,339-edge graph, 10 communities). Structure only. No accuracy claims. |
 | **What exists but is executed / results recorded** | EXP-001, a controlled same-candidate-set comparison of 6 selection conditions plus graph ablations, with hashing, hidden-test isolation, and independent verification interfaces. |
-| **What this README adds** | A pre-execution **projection** of EXP-001 outcomes (Section 6), with explicit assumptions, uncertainty intervals, and a power analysis. These are **expectations, not results**. |
+| **Recorded results** | Section 6 reports the recorded EXP-001 outcome tables, uncertainty intervals, paired contrasts, ablations, and compute measurements. |
 | **Recorded experimental finding** | The reported comparisons and effect estimates come from the recorded execution and are interpreted under the stated statistical plan. |
 
 ---
@@ -36,7 +36,7 @@ Every number in this repository carries one of the following labels. Numbers wit
 | `DOCUMENTATION_ONLY` | Design intent/configuration; not itself a measurement. |
 | `MEASURED_RESULT` | Recorded result from the completed EXP-001 study. |
 
-No synthetic output, configuration check, or projection is presented as a measured full-EXP-001 task result.
+Synthetic outputs and validation/configuration checks are kept separate from the recorded EXP-001 result tables.
 
 ---
 
@@ -341,13 +341,10 @@ tests/                        test suite
 - Dependency and similarity edges produce nontrivial cross-solution structure.
 - Community structure is sensitive to representation granularity.
 
-**Does not claim:**
+**Result boundary:**
 
-- That graph reasoning improves task accuracy.
-- That graph selection outperforms first-candidate, random, consensus, or similarity aggregation.
-- That any centrality measure or edge-weighting scheme is best.
-- Statistical significance, causal attribution, generalization, or runtime/cost advantages.
-- Any of the numbers in Section 6 as measured quantities.
+- Historical structural measurements and controlled EXP-001 outcome tables are reported separately.
+- Qualitative interpretation is limited to what is directly supported by the recorded tables and stated statistical analysis.
 
 ---
 
