@@ -1,0 +1,21 @@
+experiment_id: EXP-001
+status: FROZEN
+threshold:
+  threshold: 0.75
+knn:
+  k: 3
+weighted:
+  enabled: true
+  edge_weight: cosine_similarity
+unweighted:
+  enabled: true
+  edge_weight: 1.0
+scoring:
+  methods:
+    - weighted_degree
+    - degree_centrality
+    - pagerank
+    - local_neighborhood_agreement
+similarity:
+  function: cosine
+  normalized_embeddings_required: true

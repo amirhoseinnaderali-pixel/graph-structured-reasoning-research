@@ -1,0 +1,15 @@
+experiment_id: EXP-001
+status: UNFROZEN
+candidate_generation:
+  max_candidates: 8
+  max_calls: 8
+  max_tokens: 8192
+  max_wall_time_ms: 300000
+representation:
+  max_embedding_calls: 8
+  max_wall_time_ms: 120000
+aggregation:
+  max_wall_time_ms: 30000
+verification:
+  max_executions: 8
+  max_wall_time_ms: 120000

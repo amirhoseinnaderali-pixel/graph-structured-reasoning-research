@@ -1,0 +1,15 @@
+experiment_id: EXP-001
+status: UNFROZEN
+candidate_generator:
+  provider: external_api
+  model_id: UNSET
+  model_revision: UNSET
+  temperature: UNSET
+  max_tokens: UNSET
+  credential_env: UNSET
+embedding:
+  provider: UNSET
+  model_id: UNSET
+  revision: UNSET
+  normalize_embeddings: true
+  batch_size: 32

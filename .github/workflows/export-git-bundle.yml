@@ -1,0 +1,20 @@
+name: export-git-bundle
+on:
+  push:
+    branches: ["sync-helper"]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create bundle
+        run: git bundle create /tmp/graph-reasoning.bundle --all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: graph-reasoning-git-bundle
+          path: /tmp/graph-reasoning.bundle
+          if-no-files-found: error
